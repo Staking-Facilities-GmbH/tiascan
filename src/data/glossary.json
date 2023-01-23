@@ -1,0 +1,103 @@
+[
+	{
+		"letter": "B",
+		"entries": [
+			{
+				"title": "Block Number",
+				"content": "The block number refers to the number of blocks between the respective block and the \"genesis block\", which is the very first block of the underlying blockchain."
+			},
+			{
+				"title": "Bridge Nodes",
+				"content": "The main function of Bridge Nodes is connecting the data availability layer with the consensus layer. Furthermore, Bridge Nodes can also function as validator nodes."
+			}
+		]
+	},
+	{
+		"letter": "C",
+		"entries": [
+			{
+				"title": "Celestia",
+				"content": "Celestia is a modular blockchain network, which means that it separates the core functionalities of a blockchain, namely consensus, data availability (DA), execution, and settlement into different layers. Celestia scales through separating its’ consesnus layer from its’ execution layer and introducing data availability sampling, which means less load for light clients. There are three main layers within Celestia: the DA & consensus layer, the settlement layer, and the execution layer. To learn more about Celestia and how it works, check out the <a href='https://docs.celestia.org/' title='Read documentation' target='_blank' rel='noreferrer'>official docs</a>"
+			}
+		]
+	},
+	{
+		"letter": "F",
+		"entries": [
+			{
+				"title": "Full Storage Nodes",
+				"content": "The main objective of Full Storage Nodes is providing data availability. Hence, they store all of the networks data while not participating in consensus. Other than Full Nodes, Full Storage Nodes do not connect to the Celestia App."
+			}
+		]
+	},
+	{
+		"letter": "L",
+		"entries": [
+			{
+				"title": "Last PayForData Message Sent",
+				"content": "PayForData Messages are user-initiated transactions that request data availability from the Celestia App. Last PayForData Message Sent provides indicates when the last such transaction was initiated by the respective node."
+			},
+			{
+				"title": "Last Sample Requested",
+				"content": "This is a typical operation performed by Light Nodes, which only sample a small portion of block data. Last Sample Requested refers to the most recent transaction requesting such a sample."
+			},
+			{
+				"title": "Light Nodes",
+				"content": "Light Nodes ensure data availability and perform data availability sampling, hence they only download and verify block headers. They do not participate in consensus and require far less compute-resources than other types of nodes."
+			}
+		]
+	},
+	{
+		"letter": "N",
+		"entries": [
+			{
+				"title": "Node ID",
+				"content": "The Node ID refers to the unique identity of a specific node."
+			},
+			{
+				"title": "Node",
+				"content": "Nodes are the computers/servers constituting the network. In Celestia, there are different types of nodes, each fulfilling a different role: Light Nodes, Full Storage Nodes, Bridge Nodes, as well as Validator Nodes."
+			}
+		]
+	},
+	{
+		"letter": "S",
+		"entries": [
+			{
+				"title": "Staking Facilities",
+				"content": "Staking Facilities is a validator and node operator for several public Proof-of-Stake blockchains and web3 projects building on top of them. We run bare-metal infrastructure that we custom-built tailored to each networks unique requirements. To foster a thriving ecosystem on top of Celestia, we built TIAscan - we are always happy to receive feedback, never hesitate to reach out via our <a href='https://t.me/stakingfacilities' title='Join our telegram group' target='_blank' rel='noreferrer'>Telegram channel</a>."
+			}
+		]
+	},
+	{
+		"letter": "T",
+		"entries": [
+			{
+				"title": "Tiascan",
+				"content": "TIAscan is a block explorer for the Celestia network. By providing real-time information about the Celestia, it empowers any stakeholder to analyze the network."
+			},
+			{
+				"title": "Total PayForData Message Sent",
+				"content": "Users request the Celestia App to make data available by sending PayForData transactions. Every such transaction consists of the identity of the sender, the data to be made available, also referred to as the message, the data size, the namespace ID, and a signature. Every block producer batches multiple PayForData transactions into a block."
+			}
+		]
+	},
+	{
+		"letter": "U",
+		"entries": [
+			{
+				"title": "Uptime Score",
+				"content": "The Uptime Score encapsulates the respective validators’ time of being online measured over a time period of the past 100 blocks and denominated in percentage."
+			}
+		]
+	},
+	{
+		"letter": "V",
+		"entries": [
+			{
+				"title": "Validators",
+				"content": "Validators are special full nodes within the Celestia network. They provide the technical infrastructure and maintenance required and participate in the networks consensus. Validators propose and validate new blocks and propagate them to the network."
+			}
+		]
+	}
+]

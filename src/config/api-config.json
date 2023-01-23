@@ -1,0 +1,6 @@
+{
+  "API_URL": "http://35.246.208.130:5050",
+  "API_PREFIX": "api",
+  "API_VERSION": "v1",
+  "ITEMS_PER_PAGE": "100"
+}

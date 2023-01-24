@@ -10,6 +10,7 @@ const CelestiaApi = {
     async fetchInfo() {
         const url = [apiBase, 'info'].join('/')
         const returnValue = await Sttp
+            .withOptions({withCredentials: false})
             .withQueryParams({})
             .get(url)
 
@@ -19,6 +20,7 @@ const CelestiaApi = {
     async fetchValidators(page) {
         const url = [apiBase, 'validators'].join('/')
         const returnValue = await Sttp
+            .withOptions({withCredentials: false})
             .withQueryParams({page: page || 0})
             .get(url)
 
@@ -28,6 +30,7 @@ const CelestiaApi = {
     async fetchValidatorSearch(page, search) {
         const url = [apiBase, 'validators'].join('/')
         const returnValue = await Sttp
+            .withOptions({withCredentials: false})
             .withQueryParams({page: page || 0, query: search || ''})
             .get(url)
 
@@ -37,6 +40,7 @@ const CelestiaApi = {
     async fetchFullNodes(page) {
         const url = [apiBase, 'nodes', 'full'].join('/')
         const returnValue = await Sttp
+            .withOptions({withCredentials: false})
             .withQueryParams({page: page || 0})
             .get(url)
 
@@ -46,6 +50,7 @@ const CelestiaApi = {
     async fetchBridgeNodes(page) {
         const url = [apiBase, 'nodes', 'bridge'].join('/')
         const returnValue = await Sttp
+            .withOptions({withCredentials: false})
             .withQueryParams({page: page || 0})
             .get(url)
 
@@ -55,6 +60,7 @@ const CelestiaApi = {
     async fetchLightNodes(page) {
         const url = [apiBase, 'nodes', 'light'].join('/')
         const returnValue = await Sttp
+            .withOptions({withCredentials: false})
             .withQueryParams({page: page || 0})
             .get(url)
 
@@ -64,6 +70,7 @@ const CelestiaApi = {
     async fetchLocations(page) {
         const url = [apiBase, 'locations'].join('/')
         const returnValue = await Sttp
+            .withOptions({withCredentials: false})
             .withQueryParams({page: page || 0})
             .get(url)
 

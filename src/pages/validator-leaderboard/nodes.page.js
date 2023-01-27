@@ -37,9 +37,9 @@ const NodesPage = ({nodeType}) => {
 	let pageConf = {
 		showSearch: false,
 		title: 'Validator Leaderboard',
-		cols: ['Identity', 'Node Identity', 'PayForData Messages', 'Last PayForData'],
+		cols: ['Identity', 'Node Identity', 'Node Uptime'],
 		icon: 'node-icon.svg',
-		rowGrid: 'minmax(8rem, 8rem) minmax(40rem, auto) minmax(10rem, 15rem) minmax(10rem, 25rem)'
+		rowGrid: 'minmax(8rem, 8rem) minmax(40rem, auto) minmax(17.7rem, 25rem)'
 	}
 
 	switch (nodeType) {
@@ -189,11 +189,14 @@ const NodesPage = ({nodeType}) => {
 								</Col>
 
 								<Col>
-									<ColSpan>{row.pfd_count}</ColSpan>
-								</Col>
-
-								<Col>
-									<ColSpan>{Formatters.timeSince(row.last_pfd_timestamp)}</ColSpan>
+									<ColSpan>
+										<ProgressWrapper>
+											<ProgressInner progress={(100-index)}>
+												<span>{(100-index)} %</span>
+											</ProgressInner>
+											<ProgressBar progress={(100-index)} startColor="#91F5E6" endColor="#610DFC" />
+										</ProgressWrapper>
+									</ColSpan>
 								</Col>
 							</>
 							}

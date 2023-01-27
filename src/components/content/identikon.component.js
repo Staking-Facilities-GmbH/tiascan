@@ -7,7 +7,8 @@ import Image from "../image/image.component"
 
 
 
-const Identikon = ({identity}) => {
+const Identikon = ({identity, size}) => {
+	const identiconSize = size ||'32'
 	const palette = [
 		"#610DFC",
 		"#91F5E6"
@@ -30,7 +31,7 @@ const Identikon = ({identity}) => {
 				id={identity}
 				data-tooltip-content={identity}
 				data-tooltip-place="top">
-				<Identicon string={identity} size={'32'} palette={palette}/>
+				<Identicon string={identity} size={identiconSize} palette={palette}/>
 			</Id>
 		</>
 	)

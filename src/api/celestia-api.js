@@ -37,6 +37,15 @@ const CelestiaApi = {
         return returnValue.payload()
     },
 
+    async fetchValidatorDetails(nodeId) {
+        const url = [apiBase, 'validators', nodeId].join('/')
+        const returnValue = await Sttp
+            .withOptions({withCredentials: false})
+            .get(url)
+
+        return returnValue.payload()
+    },
+
     async fetchFullNodes(page) {
         const url = [apiBase, 'nodes', 'full'].join('/')
         const returnValue = await Sttp

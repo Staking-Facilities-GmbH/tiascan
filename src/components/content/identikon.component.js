@@ -16,23 +16,27 @@ const Identikon = ({identity, size}) => {
 
 	return (
 		<>
-			<Tooltip anchorId={identity} clickable>
-				<Id onClick={() => {navigator.clipboard.writeText(identity)}}>
-					<Image
-						src={`/assets/icons/copy-icon.svg`}
-						alt=""
-						width={16}
-						height={16}
-					/>
-					<span style={{paddingLeft: '1rem'}}>{identity}</span>
+		{(identity) &&
+			<>
+				<Tooltip anchorId={identity} clickable>
+					<Id onClick={() => {navigator.clipboard.writeText(identity)}}>
+						<Image
+							src={`/assets/icons/copy-icon.svg`}
+							alt=""
+							width={16}
+							height={16}
+						/>
+						<span style={{paddingLeft: '1rem'}}>{identity}</span>
+					</Id>
+				</Tooltip>
+				<Id onClick={() => {navigator.clipboard.writeText(identity)}}
+					id={identity}
+					data-tooltip-content={identity}
+					data-tooltip-place="top">
+					<Identicon string={identity} size={identiconSize} palette={palette}/>
 				</Id>
-			</Tooltip>
-			<Id onClick={() => {navigator.clipboard.writeText(identity)}}
-				id={identity}
-				data-tooltip-content={identity}
-				data-tooltip-place="top">
-				<Identicon string={identity} size={identiconSize} palette={palette}/>
-			</Id>
+			</>
+		}
 		</>
 	)
 }

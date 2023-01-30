@@ -17,6 +17,7 @@ import Pagination from 'rc-pagination'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { useLocationProperty } from 'wouter/use-location'
+import { useLocation } from "wouter";
 
 // Styles
 import '../../styles/pagination.css'
@@ -104,6 +105,8 @@ const NodesPage = ({nodeType}) => {
 		setSearchValue(value)
 	}
 
+	const [,navigate] = useLocation();
+
 	return (
 		<FormProvider {...methods}>
 			<BlockNumberRow stats={info} />
@@ -130,7 +133,10 @@ const NodesPage = ({nodeType}) => {
 						</HeaderBox>
 
 						{pageConf.showSearch &&
-							<Form>
+							<Form onSubmit={(e) => {
+								e.preventDefault()
+								navigate(`?search=${searchValue}`, { replace: true })
+							}}>
 								<SearchInput
 									name="search"
 									id="searchBox"

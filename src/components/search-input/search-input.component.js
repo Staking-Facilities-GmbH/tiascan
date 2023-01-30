@@ -2,9 +2,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-// Components
-import Image from '../image/image.component'
-
 const SearchInput = ({
 	name,
 	onClick,
@@ -25,7 +22,9 @@ const SearchInput = ({
 						onClick && onClick(e.target.value)
 					}}/>
 				<figure>
-					<Image
+					<input
+						type="image"
+						name="submit"
 						src="/assets/icons/magnifier-icon.svg"
 						alt="search icon"
 						width={16}

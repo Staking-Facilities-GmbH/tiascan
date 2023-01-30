@@ -76,6 +76,15 @@ const CelestiaApi = {
         return returnValue.payload()
     },
 
+    async fetchNodeDetails(nodeId) {
+        const url = [apiBase, 'nodes', nodeId].join('/')
+        const returnValue = await Sttp
+            .withOptions({withCredentials: false})
+            .get(url)
+
+        return returnValue.payload()
+    },
+
     async fetchLocations(page) {
         const url = [apiBase, 'locations'].join('/')
         const returnValue = await Sttp

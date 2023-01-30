@@ -4,17 +4,13 @@ import styled, { css } from 'styled-components'
 
 // Components
 import Image from '../image/image.component'
-import {useFormContext} from 'react-hook-form';
-
 
 const SearchInput = ({
 	name,
 	onClick,
 	...rest
 }) => {
-	const { register, watch } = useFormContext()
 
-	const val = watch(name)
 
 	return (
 		<InputContainer className="input">
@@ -23,12 +19,11 @@ const SearchInput = ({
 					{...rest}
 					className="form-input"
 					type={"text"}
-					onKeyUp={(e) => {
+					onChange={(e) => {
 						e.preventDefault()
 						e.stopPropagation()
-						onClick && onClick(val)
-					}}
-					{...register(name)}/>
+						onClick && onClick(e.target.value)
+					}}/>
 				<figure>
 					<Image
 						src="/assets/icons/magnifier-icon.svg"

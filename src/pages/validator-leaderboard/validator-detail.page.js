@@ -58,11 +58,11 @@ const ValidatorDetailPage = ({params}) => {
 		}
 
 		triggerFetchValidatorDetails().then((data) => {
-			console.log(data)
 			//handle not found - back to list?
 			if (!data.node_id) navigate("/validators", { replace: true })
 			setValidatorDetails({...placeholderData, ...data})
 		})
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 	
 	return(

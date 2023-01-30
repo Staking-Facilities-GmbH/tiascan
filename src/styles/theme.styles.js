@@ -15,7 +15,10 @@ export const light = {
 		contentBgHighlight: "rgba(255,255,255,0.75)",
 		blocksBg: "rgba(255,255,255,0.05)",
 		progressBg: "#E7EAEE",
-		paginationBg: "#323232"
+		paginationBg: "#323232",
+		fact1: "#8B00FF",
+		fact2: "#575DF6",
+		fact3: "#80BFFE"
 	},
 	button: {
 		color: "#000",

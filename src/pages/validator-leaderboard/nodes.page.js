@@ -26,6 +26,7 @@ import CelestiaApi from '../../api/celestia-api'
 
 // Conf
 import apiConf from '../../config/api-config.json'
+import {Link} from "wouter";
 
 const NodesPage = ({nodeType}) => {
 	const [searchValue, setSearchValue] = useState(
@@ -158,7 +159,12 @@ const NodesPage = ({nodeType}) => {
 								</Col>
 
 								<Col>
-									<ColSpan>{row.moniker}</ColSpan>
+									<ColSpan>
+										<Link to={`/validator/${row.opr_addr}`}
+											title={`Check details of ${row.moniker}`}>
+											{row.moniker}
+										</Link>
+									</ColSpan>
 								</Col>
 
 								<Col>
@@ -295,6 +301,14 @@ const ColSpan = styled.span`
 
 	&.head {
 		line-height: 2rem;
+	}
+	
+	a {
+		color: ${({ theme }) => theme.colors.fontColor};
+		
+		&:hover {
+			text-decoration: underline;
+		}
 	}
 `
 

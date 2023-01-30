@@ -7,7 +7,8 @@ import Image from "../image/image.component"
 
 
 
-const Identikon = ({identity}) => {
+const Identikon = ({identity, size}) => {
+	const identiconSize = size ||'32'
 	const palette = [
 		"#610DFC",
 		"#91F5E6"
@@ -15,23 +16,27 @@ const Identikon = ({identity}) => {
 
 	return (
 		<>
-			<Tooltip anchorId={identity} clickable>
-				<Id onClick={() => {navigator.clipboard.writeText(identity)}}>
-					<Image
-						src={`/assets/icons/copy-icon.svg`}
-						alt=""
-						width={16}
-						height={16}
-					/>
-					<span style={{paddingLeft: '1rem'}}>{identity}</span>
+		{(identity) &&
+			<>
+				<Tooltip anchorId={identity} clickable>
+					<Id onClick={() => {navigator.clipboard.writeText(identity)}}>
+						<Image
+							src={`/assets/icons/copy-icon.svg`}
+							alt=""
+							width={16}
+							height={16}
+						/>
+						<span style={{paddingLeft: '1rem'}}>{identity}</span>
+					</Id>
+				</Tooltip>
+				<Id onClick={() => {navigator.clipboard.writeText(identity)}}
+					id={identity}
+					data-tooltip-content={identity}
+					data-tooltip-place="top">
+					<Identicon string={identity} size={identiconSize} palette={palette}/>
 				</Id>
-			</Tooltip>
-			<Id onClick={() => {navigator.clipboard.writeText(identity)}}
-				id={identity}
-				data-tooltip-content={identity}
-				data-tooltip-place="top">
-				<Identicon string={identity} size={'32'} palette={palette}/>
-			</Id>
+			</>
+		}
 		</>
 	)
 }

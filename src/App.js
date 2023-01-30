@@ -17,6 +17,7 @@ import { GlobalStyles } from './styles/global.styles'
 
 // Pages
 const NodesPage = lazy(() => import('./pages/validator-leaderboard/nodes.page'))
+const ValidatorDetailPage = lazy(() => import('./pages/validator-leaderboard/validator-detail.page'))
 
 const AboutPage = lazy(() => import('./pages/static/about.page'))
 const ImprintPage = lazy(() => import('./pages/static/imprint.page'))
@@ -46,6 +47,8 @@ const App = () => {
 							<Route path="/light-nodes">
 								<NodesPage nodeType="light" />
 							</Route>
+
+							<Route path="/validator/:identity" component={ValidatorDetailPage} />
 
 							<Route path="/about" component={AboutPage} />
 							<Route path="/imprint" component={ImprintPage} />

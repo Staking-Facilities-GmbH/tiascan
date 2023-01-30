@@ -37,7 +37,7 @@ const NodesPage = ({nodeType}) => {
 	const [page, setPage] = useState(1)
 
 	let pageConf = {
-		showSearch: false,
+		showSearch: true,
 		title: 'Validator Leaderboard',
 		cols: ['Identity', 'Node Identity', 'Node Uptime'],
 		icon: 'node-icon.svg',
@@ -55,7 +55,6 @@ const NodesPage = ({nodeType}) => {
 			pageConf.title = 'Light Nodes'
 			break
 		default: //validators
-			pageConf.showSearch = true
 			pageConf.cols = ['Identity', 'Validator Name', 'Missed Blocks', 'Uptime Score']
 			pageConf.icon = 'validator-icon.svg'
 			pageConf.rowGrid = 'minmax(7rem, 10rem) minmax(35rem, auto) minmax(10rem, 15rem) minmax(17.7rem, 25rem)'
@@ -69,17 +68,13 @@ const NodesPage = ({nodeType}) => {
 		async function triggerFetchNodes() {
 			switch (nodeType) {
 				case 'bridge':
-					return await CelestiaApi.fetchBridgeNodes(page)
+					return await CelestiaApi.fetchBridgeNodes(page, searchValue)
 				case 'full':
-					return await CelestiaApi.fetchFullNodes(page)
+					return await CelestiaApi.fetchFullNodes(page, searchValue)
 				case 'light':
-					return await CelestiaApi.fetchLightNodes(page)
+					return await CelestiaApi.fetchLightNodes(page, searchValue)
 				default:
-					if (searchValue) {
-						return await CelestiaApi.fetchValidatorSearch(page, searchValue)
-					} else {
-						return await CelestiaApi.fetchValidators(page)
-					}
+					return await CelestiaApi.fetchValidators(page, searchValue)
 			}
 		}
 

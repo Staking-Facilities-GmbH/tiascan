@@ -17,17 +17,7 @@ const CelestiaApi = {
         return returnValue.payload()
     },
 
-    async fetchValidators(page) {
-        const url = [apiBase, 'validators'].join('/')
-        const returnValue = await Sttp
-            .withOptions({withCredentials: false})
-            .withQueryParams({page: page || 0})
-            .get(url)
-
-        return returnValue.payload()
-    },
-
-    async fetchValidatorSearch(page, search) {
+    async fetchValidators(page, search) {
         const url = [apiBase, 'validators'].join('/')
         const returnValue = await Sttp
             .withOptions({withCredentials: false})
@@ -46,31 +36,31 @@ const CelestiaApi = {
         return returnValue.payload()
     },
 
-    async fetchFullNodes(page) {
+    async fetchFullNodes(page, search) {
         const url = [apiBase, 'nodes', 'full'].join('/')
         const returnValue = await Sttp
             .withOptions({withCredentials: false})
-            .withQueryParams({page: page || 0})
+            .withQueryParams({page: page || 0, query: search || ''})
             .get(url)
 
         return returnValue.payload()
     },
 
-    async fetchBridgeNodes(page) {
+    async fetchBridgeNodes(page, search) {
         const url = [apiBase, 'nodes', 'bridge'].join('/')
         const returnValue = await Sttp
             .withOptions({withCredentials: false})
-            .withQueryParams({page: page || 0})
+            .withQueryParams({page: page || 0, query: search || ''})
             .get(url)
 
         return returnValue.payload()
     },
 
-    async fetchLightNodes(page) {
+    async fetchLightNodes(page, search) {
         const url = [apiBase, 'nodes', 'light'].join('/')
         const returnValue = await Sttp
             .withOptions({withCredentials: false})
-            .withQueryParams({page: page || 0})
+            .withQueryParams({page: page || 0, query: search || ''})
             .get(url)
 
         return returnValue.payload()

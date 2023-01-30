@@ -32,14 +32,10 @@ const ValidatorDetailPage = ({params}) => {
 	}
 
 	const placeholderData = {
-		commission_max_rate: '3.1%',
-		commission_rate: '5%',
-		details: 'Staking Facilities is a validator and node operator for several public Proof-of-Stake blockchains and web3 projects building on top of them. We run bare-metal infrastructure that we custom-built tailored to each networks unique requirements. To foster a thriving ecosystem on top of Celestia, we built TIAscan - we are always happy to receive feedback, never hesitate to reach out via our Telegram channel.',
-		identity: 'Staking Facilities',
-		min_self_delegation: '100 TIA',
-		moniker: 'Staking Facilities',
-		security_contact: 'info@stakingfacilities.com',
-		website: 'https://www.stakingfacilities.com'
+		commission_max_rate: '5%',
+		commission_rate: '3%',
+		commission_max_change_rate: '0.1%',
+		min_self_delegation: '100 TIA'
 	}
 	
 	// go back to list if no validator ID given
@@ -89,11 +85,11 @@ const ValidatorDetailPage = ({params}) => {
 						<NodeHead>
 							<Identikon identity={validatorDetails.node_id} size="100" />
 							<Identity>
-								<Name>{validatorDetails.moniker}</Name>
-								<a href={validatorDetails.website}
+								<Name>{validatorDetails?.moniker}</Name>
+								<a href={validatorDetails?.description?.website}
 								   target="_blank" rel="noreferrer"
-								   title={`${validatorDetails.moniker} Website`}>
-									{validatorDetails.website}
+								   title={`${validatorDetails?.moniker} Website`}>
+									{validatorDetails?.description?.website}
 								</a>
 							</Identity>
 						</NodeHead>
@@ -116,7 +112,7 @@ const ValidatorDetailPage = ({params}) => {
 								</Description>
 							</Fact>
 							<Fact>
-								<Number>{validatorDetails.commission_max_rate}</Number>
+								<Number>{validatorDetails.commission_max_change_rate}</Number>
 								<Description>
 									Commission Initial Rate<br />
 									(Comission Rate %)
@@ -129,14 +125,14 @@ const ValidatorDetailPage = ({params}) => {
 						<Details>
 							<Detail>
 								<Label>Security Contact</Label>
-								<a href={`mailto:${validatorDetails.security_contact}`}
-									title={`Send email to ${validatorDetails.moniker}`}>
-									{validatorDetails.security_contact}
+								<a href={`mailto:${validatorDetails?.description?.security_contact}`}
+									title={`Send email to ${validatorDetails?.moniker}`}>
+									{validatorDetails?.description?.security_contact}
 								</a>
 							</Detail>
 							<Detail>
 								<Label>Identity</Label>
-								{validatorDetails.identity}
+								{validatorDetails?.description?.identity}
 							</Detail>
 							<Detail>
 								<Label>Min Self Delegation</Label>
@@ -159,7 +155,7 @@ const ValidatorDetailPage = ({params}) => {
 							<Detail>
 								<Label>Details</Label>
 								<IntroText>
-									{validatorDetails.details}
+									{validatorDetails?.description?.details}
 								</IntroText>
 							</Detail>
 						</Details>

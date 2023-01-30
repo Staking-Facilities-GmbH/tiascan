@@ -191,7 +191,12 @@ const NodesPage = ({nodeType}) => {
 								</Col>
 
 								<Col>
-									<ColSpan className="nodeId">{row.node_id}</ColSpan>
+									<ColSpan className="nodeId">
+										<Link to={`/${nodeType}-node/${row.node_id}`}
+											  title={`Check details of ${row.node_id}`}>
+											{row.node_id}
+										</Link>
+									</ColSpan>
 								</Col>
 
 								<Col>

@@ -18,6 +18,7 @@ import { GlobalStyles } from './styles/global.styles'
 // Pages
 const NodesPage = lazy(() => import('./pages/validator-leaderboard/nodes.page'))
 const ValidatorDetailPage = lazy(() => import('./pages/validator-leaderboard/validator-detail.page'))
+const NodeDetailPage = lazy(() => import('./pages/validator-leaderboard/node-detail.page'))
 
 const AboutPage = lazy(() => import('./pages/static/about.page'))
 const ImprintPage = lazy(() => import('./pages/static/imprint.page'))
@@ -38,17 +39,30 @@ const App = () => {
 							<Route path="/validators">
 								<NodesPage nodeType="validator" />
 							</Route>
+							<Route path="/validator/:identity" component={ValidatorDetailPage} />
+
 							<Route path="/bridge-nodes">
 								<NodesPage nodeType="bridge" />
 							</Route>
+							<Route path="/bridge-node/:identity">
+								{params => <NodeDetailPage nodeType="bridge" identity={params.identity} />}
+							</Route>
+
+
 							<Route path="/full-storage">
 								<NodesPage nodeType="full" />
 							</Route>
+							<Route path="/full-node/:identity">
+								{params => <NodeDetailPage nodeType="full" identity={params.identity} />}
+							</Route>
+
 							<Route path="/light-nodes">
 								<NodesPage nodeType="light" />
 							</Route>
+							<Route path="/light-node/:identity">
+								{params => <NodeDetailPage nodeType="light" identity={params.identity} />}
+							</Route>
 
-							<Route path="/validator/:identity" component={ValidatorDetailPage} />
 
 							<Route path="/about" component={AboutPage} />
 							<Route path="/imprint" component={ImprintPage} />

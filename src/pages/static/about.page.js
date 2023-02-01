@@ -85,7 +85,7 @@ const Flex = styled.div`
 const LinkBox = styled.div`
 	display: inline-block;
 	background-color: ${({ theme }) => theme.colors.contentBg};
-	border-radius: ${({ theme }) => theme.border.smallRadius};
+	border-radius: ${({ theme }) => theme.border.mediumRadius};
 	padding: 0.8rem 2.8rem 0.5rem;	
 	
 	a {

@@ -1,6 +1,7 @@
 // Utils
 import styled from 'styled-components'
 import Image from '../image/image.component'
+import {Link} from "wouter";
 
 const NodeStats = ({stats, active}) => {
 	return (
@@ -14,9 +15,9 @@ const NodeStats = ({stats, active}) => {
 						height={34}
 					/>
 				</figure>
-				<Title className={active === 'validator' ? 'active' : ''}>
+				<TitleLink to="/validators" className={active === 'validator' ? 'active' : ''}>
 					Validators:
-				</Title>
+				</TitleLink>
 				<Count> {stats?.counts?.validators_nodes}</Count>
 			</Stat>
 			<Stat>
@@ -28,9 +29,9 @@ const NodeStats = ({stats, active}) => {
 						height={34}
 					/>
 				</figure>
-				<Title className={active === 'bridge' ? 'active' : ''}>
+				<TitleLink to="/bridge-nodes" className={active === 'bridge' ? 'active' : ''}>
 					Bridge Nodes:
-				</Title>
+				</TitleLink>
 				<Count> {stats?.counts?.bridge_nodes}</Count>
 			</Stat>
 			<Stat>
@@ -42,9 +43,9 @@ const NodeStats = ({stats, active}) => {
 						height={34}
 					/>
 				</figure>
-				<Title className={active === 'full' ? 'active' : ''}>
+				<TitleLink to="/full-storage" className={active === 'full' ? 'active' : ''}>
 					Full Storage Nodes:
-				</Title>
+				</TitleLink>
 				<Count> {stats?.counts?.full_nodes}</Count>
 			</Stat>
 			<Stat>
@@ -56,9 +57,9 @@ const NodeStats = ({stats, active}) => {
 						height={34}
 					/>
 				</figure>
-				<Title className={active === 'light' ? 'active' : ''}>
+				<TitleLink to="/light-nodes" className={active === 'light' ? 'active' : ''}>
 					Light Nodes:
-				</Title>
+				</TitleLink>
 				<Count> {stats?.counts?.light_nodes}</Count>
 			</Stat>
 		</NodeStat>
@@ -70,10 +71,13 @@ export default NodeStats
 
 const NodeStat = styled.div`
 	margin-left: 3rem;
+	padding: 2rem 3rem;
+	background-color: ${({ theme }) => theme.colors.contentBg};
+	border-radius: ${({ theme }) => theme.border.mediumRadius};
 `
 
 const Stat = styled.div`
-	margin: 1.5rem 0;
+	margin-bottom: 3rem;
 	
 	figure {
 		display: inline-block;
@@ -81,14 +85,15 @@ const Stat = styled.div`
 	}
 `
 
-const Title = styled.span`
+const TitleLink = styled(Link)`
 	font-size: 2.4rem;
 	line-height: 3.4rem;
 	vertical-align: top;
 	font-weight: 300;
-
+	color: ${({ theme }) => theme.header.navItemColor};
+	
 	&.active {
-		border-bottom: 1px solid;
+		border-bottom: 0.2rem solid;
 	}
 `
 

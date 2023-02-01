@@ -39,7 +39,7 @@ const BlockNumberRow = ({stats}) => {
 			</Front>
 			<Back>
 
-				<CTA title="Reload page data" onClick={() => { navigate("/glossary") }}>
+				<CTA title="Check out the glossary" onClick={() => { navigate("/glossary") }}>
 					<figure>
 						<Image
 							src={`/assets/icons/info-icon.svg`}
@@ -87,7 +87,7 @@ const BlockNumber = styled.span`
 	font-weight: 300;
 	
 	span {
-		border-bottom: 1px solid;
+		border-bottom: 0.2rem solid;
 	}
 `
 
@@ -99,7 +99,7 @@ const CTA = styled.div`
 	box-shadow: ${({ theme }) => theme.shadows.boxShadow};
 	padding: 1.1rem 2.7rem 0.7rem;
 	vertical-align: top;
-
+	
 	figure {
 		display: inline-block;
 	}

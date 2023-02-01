@@ -261,6 +261,10 @@ const Content = styled.div`
 
 const HeaderBox = styled.div`
 	margin-left: -3rem;
+	min-width: 45rem;
+	padding: 0.5rem 2rem;
+	background-color: ${({ theme }) => theme.colors.contentBg};
+	border-radius: ${({ theme }) => theme.border.mediumRadius};
 	
 	figure {
 		display: inline-block;
@@ -272,7 +276,7 @@ const Title = styled.h1`
 	display: inline;
 	font-size: 2.4rem;
 	line-height: 3rem;
-	border-bottom: 1px solid;
+	border-bottom: 0.2rem solid;
 	vertical-align: top;
 `
 

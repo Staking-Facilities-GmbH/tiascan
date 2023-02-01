@@ -25,9 +25,8 @@ export const light = {
 		background: "#eee",
 	},
 	border: {
-		xsRadius: "0.4rem",
-		smallRadius: "0.8rem",
-		mediumRadius: "1.6rem",
+		smallRadius: "0.4rem",
+		mediumRadius: "0.8rem",
 	},
 	header: {
 		navItemColor: "#000",

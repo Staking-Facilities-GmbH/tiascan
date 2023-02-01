@@ -82,7 +82,7 @@ const LettersContainer = styled.div`
 const LetterAnchors = styled.div`
 	display: inline-block;
 	background-color: ${({ theme }) => theme.colors.contentBgHighlight};
-	border-radius: ${({ theme }) => theme.border.smallRadius};
+	border-radius: ${({ theme }) => theme.border.mediumRadius};
 	max-width: 100%;
 	
 	span {

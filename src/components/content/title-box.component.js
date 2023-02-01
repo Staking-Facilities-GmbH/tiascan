@@ -28,7 +28,7 @@ const TitleElem = styled.div`
 	display: inline-block;
 	min-width: 47rem;
 	background-color: ${({ theme }) => theme.colors.contentBg};
-	border-radius: ${({ theme }) => theme.border.smallRadius};
+	border-radius: ${({ theme }) => theme.border.mediumRadius};
 	padding: 0.8rem 3.4rem 0.5rem;
 	margin-bottom: 3.8rem;
 	
@@ -41,7 +41,7 @@ const TitleElem = styled.div`
 
 const Title = styled.h1`
 	display: inline;
-	border-bottom: 1px solid;
+	border-bottom: 0.2rem solid;
 	font-size: 2.4rem;
 	line-height: 3.2rem;
 	vertical-align: top;

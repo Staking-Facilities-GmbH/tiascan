@@ -63,11 +63,16 @@ const InputGroup = styled.div`
 		width: 100%;
 		border: ${({ theme, hasError }) =>
 			hasError ? `${theme.input.errBorder}` : `${theme.input.border}`};
-		border-radius: ${({ theme }) => theme.border.smallRadius};
+		border-radius: ${({ theme }) => theme.border.mediumRadius};
 		/* margin: 2rem 0 1rem; */
 		font-family: inherit;
+		
 		&:focus {
 			outline: none;
+			box-shadow: ${({ theme }) => theme.shadows.ctaShadow};
+		}
+		&:hover {
+			box-shadow: ${({ theme }) => theme.shadows.ctaShadow};
 		}
 		&:focus ~ .form-input-label {
 			${shrinkLabel}

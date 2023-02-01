@@ -108,9 +108,13 @@ export const GlobalStyles = createGlobalStyle`
   .pagination {
     display: inline-block;
     background-color: ${({ theme }) => theme.colors.contentBg};
-    border-radius: ${({ theme }) => theme.border.smallRadius};
+    border-radius: ${({ theme }) => theme.border.mediumRadius};
     padding: 0.8rem 0.5rem 0.5rem 2rem;
 
+    .rc-pagination-item {
+      border-radius: ${({ theme }) => theme.border.smallRadius};
+    }
+    
     .rc-pagination-item:focus a, .rc-pagination-item:hover a {
       color: #000000;
     }

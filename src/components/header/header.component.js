@@ -42,6 +42,7 @@ const Header = () => {
 
 	return (
 		<>
+			<TopBar />
 			<HeaderContainer>
 				<Link to="/">
 					<LogoFigure>
@@ -206,4 +207,9 @@ const MobileNavLink = styled(Link)`
 		color: ${({ hoverColor }) => hoverColor};
 		border-bottom: 0.2rem solid ${({ hoverColor }) => hoverColor};
 	}
+`
+
+const TopBar = styled.div`
+	height: 4.2rem;
+	background-color: ${({ theme }) => theme.footer.backgroundColor};
 `

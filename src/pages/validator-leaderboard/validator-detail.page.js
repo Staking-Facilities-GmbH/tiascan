@@ -276,7 +276,7 @@ const Title = styled.h1`
 	display: inline;
 	font-size: 2.4rem;
 	line-height: 3rem;
-	border-bottom: 1px solid;
+	border-bottom: 0.2rem solid;
 	vertical-align: top;
 `
 

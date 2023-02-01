@@ -38,6 +38,7 @@ const NodesPage = ({nodeType}) => {
 
 	let pageConf = {
 		showSearch: true,
+		searchPlaceholder: 'Search by identity...',
 		title: 'Validator Leaderboard',
 		cols: ['Identity', 'Node Identity', 'Node Uptime'],
 		icon: 'node-icon.svg',
@@ -55,6 +56,7 @@ const NodesPage = ({nodeType}) => {
 			pageConf.title = 'Light Nodes'
 			break
 		default: //validators
+			pageConf.searchPlaceholder = 'Search for name or identity...'
 			pageConf.cols = ['Identity', 'Validator Name', 'Missed Blocks', 'Uptime Score']
 			pageConf.icon = 'validator-icon.svg'
 			pageConf.rowGrid = 'minmax(7rem, 10rem) minmax(35rem, auto) minmax(10rem, 15rem) minmax(17.7rem, 25rem)'
@@ -137,7 +139,7 @@ const NodesPage = ({nodeType}) => {
 									name="search"
 									id="searchBox"
 									value={searchValue ?? searchValue}
-									placeholder="Search for name or identity..."
+									placeholder={pageConf.searchPlaceholder}
 									onClick={searchChange}/>
 							</Form>
 						}

@@ -37,33 +37,59 @@ const CelestiaApi = {
     },
 
     async fetchFullNodes(page, search) {
-        const url = [apiBase, 'nodes', 'full'].join('/')
-        const returnValue = await Sttp
-            .withOptions({withCredentials: false})
-            .withQueryParams({page: page || 0, query: search || ''})
-            .get(url)
-
-        return returnValue.payload()
+        if (search !== '') {
+            const url = [apiBase, 'nodes', search].join('/')
+            const returnValue = await Sttp
+                .withOptions({withCredentials: false})
+                .get(url)
+            if (returnValue.status() === 404) return {}
+            return {rows: [returnValue.payload()]}
+        } else {
+            const url = [apiBase, 'nodes', 'full'].join('/')
+            const returnValue = await Sttp
+                .withOptions({withCredentials: false})
+                .withQueryParams({page: page || 0})
+                .get(url)
+            return returnValue.payload()
+        }
     },
 
     async fetchBridgeNodes(page, search) {
-        const url = [apiBase, 'nodes', 'bridge'].join('/')
-        const returnValue = await Sttp
-            .withOptions({withCredentials: false})
-            .withQueryParams({page: page || 0, query: search || ''})
-            .get(url)
+        if (search !== '') {
+            const url = [apiBase, 'nodes', search].join('/')
+            const returnValue = await Sttp
+                .withOptions({withCredentials: false})
+                .get(url)
+            if (returnValue.status() === 404) return {}
+            return {rows: [returnValue.payload()]}
+        } else {
+            const url = [apiBase, 'nodes', 'bridge'].join('/')
+            const returnValue = await Sttp
+                .withOptions({withCredentials: false})
+                .withQueryParams({page: page || 0})
+                .get(url)
 
-        return returnValue.payload()
+            return returnValue.payload()
+        }
     },
 
     async fetchLightNodes(page, search) {
-        const url = [apiBase, 'nodes', 'light'].join('/')
-        const returnValue = await Sttp
-            .withOptions({withCredentials: false})
-            .withQueryParams({page: page || 0, query: search || ''})
-            .get(url)
+        if (search !== '') {
+            const url = [apiBase, 'nodes', search].join('/')
+            const returnValue = await Sttp
+                .withOptions({withCredentials: false})
+                .get(url)
+            if (returnValue.status() === 404) return {}
+            return {rows: [returnValue.payload()]}
+        } else {
+            const url = [apiBase, 'nodes', 'light'].join('/')
+            const returnValue = await Sttp
+                .withOptions({withCredentials: false})
+                .withQueryParams({page: page || 0})
+                .get(url)
 
-        return returnValue.payload()
+            return returnValue.payload()
+        }
     },
 
     async fetchNodeDetails(nodeId) {

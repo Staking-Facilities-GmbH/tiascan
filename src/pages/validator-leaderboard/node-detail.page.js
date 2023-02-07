@@ -102,6 +102,10 @@ const NodeDetailPage = ({nodeType, identity}) => {
 								{Formatters.readableNumber(nodeDetails.head)}
 							</Detail>
 							<Detail>
+								<Label>Node Start Time</Label>
+								{new Date(nodeDetails.start_time || '').toLocaleString()}
+							</Detail>
+							<Detail>
 								<Label>PayForBlob Count</Label>
 								{Formatters.readableNumber(nodeDetails.pfb_count)}
 							</Detail>

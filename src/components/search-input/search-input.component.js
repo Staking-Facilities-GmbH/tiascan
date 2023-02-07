@@ -61,18 +61,19 @@ const InputGroup = styled.div`
 		padding: 1rem 4rem 1rem 3rem;
 		display: block;
 		width: 100%;
-		border: ${({ theme, hasError }) =>
-			hasError ? `${theme.input.errBorder}` : `${theme.input.border}`};
+		border: 0.1rem solid transparent;
 		border-radius: ${({ theme }) => theme.border.mediumRadius};
-		/* margin: 2rem 0 1rem; */
 		font-family: inherit;
+		transition: 1.5s ease-in-out;
 		
 		&:focus {
 			outline: none;
 			box-shadow: ${({ theme }) => theme.shadows.ctaShadow};
+			border-color: ${({ theme }) => theme.colors.ctaColor};
 		}
-		&:hover {
+		&:hover {		
 			box-shadow: ${({ theme }) => theme.shadows.ctaShadow};
+			border-color: ${({ theme }) => theme.colors.ctaColor};
 		}
 		&:focus ~ .form-input-label {
 			${shrinkLabel}

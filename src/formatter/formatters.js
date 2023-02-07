@@ -30,9 +30,15 @@ const Formatters = {
         return Math.floor(seconds) + " seconds ago"
     },
 
-    readableNumber(number) {
+    readableNumber(number, rounding = true) {
         if (isNaN(number)) return number
+        if (rounding) number = Math.round((number + Number.EPSILON) * 100) / 100
         return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+    },
+
+    checkHttp(link) {
+        if (!link || link.startsWith('http')) return link
+        return `http://${link}`
     }
 }
 

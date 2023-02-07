@@ -18,7 +18,8 @@ export const light = {
 		paginationBg: "#323232",
 		fact1: "#8B00FF",
 		fact2: "#575DF6",
-		fact3: "#80BFFE"
+		fact3: "#80BFFE",
+		ctaColor: "rgba(145, 245, 230, 1)"
 	},
 	button: {
 		color: "#000",

@@ -19,6 +19,7 @@ import CelestiaApi from '../../api/celestia-api'
 
 // Conf
 import {useLocation} from "wouter";
+import ProgressBar from "../../components/content/progress-bar.component";
 
 const NodeDetailPage = ({nodeType, identity}) => {
 	const [, navigate] = useLocation()
@@ -28,6 +29,18 @@ const NodeDetailPage = ({nodeType, identity}) => {
 	const pageConf = {
 		title: 'Node Details',
 		icon: 'node-icon.svg'
+	}
+
+	switch (nodeType) {
+		case 'bridge':
+			pageConf.title = 'Bridge Node Details'
+			break
+		case 'full':
+			pageConf.title = 'Full Node Details'
+			break
+		case 'light':
+			pageConf.title = 'Light Node Details'
+			break
 	}
 	
 	// go back to list if no validator ID given
@@ -89,12 +102,33 @@ const NodeDetailPage = ({nodeType, identity}) => {
 								{Formatters.readableNumber(nodeDetails.head)}
 							</Detail>
 							<Detail>
-								<Label>PayForData Count</Label>
-								{Formatters.readableNumber(nodeDetails.pfd_count)}
+								<Label>PayForBlob Count</Label>
+								{Formatters.readableNumber(nodeDetails.pfb_count)}
 							</Detail>
 							<Detail>
-								<Label>Last PayForData</Label>
-								{Formatters.timeSince(nodeDetails.last_pfd_timestamp)}
+								<Label>Last PayForBlob</Label>
+								{Formatters.timeSince(nodeDetails.last_pfb_timestamp)}
+							</Detail>
+							{(nodeType === 'bridge') &&
+							<Detail>
+								<Label>Total Synced Headers</Label>
+								{Formatters.readableNumber(nodeDetails.total_synced_headers)}
+							</Detail>
+							}
+							{(nodeType !== 'bridge') &&
+							<Detail>
+								<Label>Total Sympled Headers (DAS)</Label>
+								{Formatters.readableNumber(nodeDetails.das_total_sampled_headers)}
+							</Detail>
+							}
+							<Detail>
+								<Label>Uptime Score (last {info?.signed_blocks_window} blocks)</Label>
+								<ProgressWrapper>
+									<ProgressInner progress={(nodeDetails?.uptime)}>
+										<span>{Formatters.readableNumber(nodeDetails?.uptime)} %</span>
+									</ProgressInner>
+									<ProgressBar progress={nodeDetails?.uptime} startColor="#91F5E6" endColor="#610DFC" />
+								</ProgressWrapper>
 							</Detail>
 						</Details>
 
@@ -173,4 +207,37 @@ const Title = styled.h1`
 	line-height: 3rem;
 	border-bottom: 0.2rem solid;
 	vertical-align: top;
+`
+
+const ProgressWrapper = styled.div`
+	display: inline-block;
+	position: relative;
+	width: 17.7rem;
+	height: 3rem;
+	color: ${({ theme }) => theme.colors.background};
+	background-color: ${({ theme }) => theme.colors.progressBg};
+	border: 1px solid white;
+	box-shadow: ${({ theme }) => theme.shadows.progressShadow};
+	text-align: right;
+`
+
+const ProgressInner = styled.div`
+	position: absolute;
+	z-index: 1;
+	width: ${({ progress }) => progress && progress}%;
+	height: 100%;
+	text-align: right;
+
+	span {
+		color: ${({ progress }) => (parseInt(progress) > 30) ? 'white' : 'black'};
+		display: inline-block;
+		min-width: 5rem;
+		max-height: 100%;
+		line-height: 2.6rem;
+		overflow: visible;
+		padding-right: 1rem;
+		padding-left: ${({ progress }) => (parseInt(progress) > 30) ? '0' : '115%'};
+		white-space: nowrap;
+		vertical-align: top;
+	}
 `

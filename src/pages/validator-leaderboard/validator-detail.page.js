@@ -19,6 +19,7 @@ import CelestiaApi from '../../api/celestia-api'
 
 // Conf
 import {useLocation} from "wouter";
+import Formatters from "../../formatter/formatters";
 
 
 const ValidatorDetailPage = ({params}) => {
@@ -83,10 +84,10 @@ const ValidatorDetailPage = ({params}) => {
 
 					<Content>
 						<NodeHead>
-							<Identikon identity={validatorDetails.node_id} size="100" />
+							<Identikon identity={validatorDetails?.node_id} size="100" />
 							<Identity>
 								<Name>{validatorDetails?.moniker}</Name>
-								<a href={validatorDetails?.description?.website}
+								<a href={Formatters.checkHttp(validatorDetails?.description?.website)}
 								   target="_blank" rel="noreferrer"
 								   title={`${validatorDetails?.moniker} Website`}>
 									{validatorDetails?.description?.website}
@@ -98,21 +99,21 @@ const ValidatorDetailPage = ({params}) => {
 
 						<Facts>
 							<Fact>
-								<Number>{validatorDetails.commission_rate}</Number>
+								<Number>{validatorDetails?.commission_rate}</Number>
 								<Description>
 									Commission Initial Rate<br />
 									(Comission Rate %)
 								</Description>
 							</Fact>
 							<Fact>
-								<Number>{validatorDetails.commission_max_rate}</Number>
+								<Number>{validatorDetails?.commission_max_rate}</Number>
 								<Description>
 									Commission Initial Rate<br />
 									(Comission Rate %)
 								</Description>
 							</Fact>
 							<Fact>
-								<Number>{validatorDetails.commission_max_change_rate}</Number>
+								<Number>{validatorDetails?.commission_max_change_rate}</Number>
 								<Description>
 									Commission Initial Rate<br />
 									(Comission Rate %)
@@ -136,15 +137,15 @@ const ValidatorDetailPage = ({params}) => {
 							</Detail>
 							<Detail>
 								<Label>Min Self Delegation</Label>
-								{validatorDetails.min_self_delegation}
+								{validatorDetails?.min_self_delegation}
 							</Detail>
 							<Detail>
-								<Label>Uptime Score (last 100 blocks)</Label>
+								<Label>Uptime Score (last {info?.signed_blocks_window} blocks)</Label>
 								<ProgressWrapper>
-									<ProgressInner progress={(100)}>
-										<span>{(100)} %</span>
+									<ProgressInner progress={(validatorDetails?.uptime)}>
+										<span>{Formatters.readableNumber(validatorDetails?.uptime)} %</span>
 									</ProgressInner>
-									<ProgressBar progress={(100)} startColor="#91F5E6" endColor="#610DFC" />
+									<ProgressBar progress={validatorDetails?.uptime} startColor="#91F5E6" endColor="#610DFC" />
 								</ProgressWrapper>
 							</Detail>
 						</Details>
@@ -153,7 +154,7 @@ const ValidatorDetailPage = ({params}) => {
 
 						<Details>
 							<Detail>
-								<Label>Details</Label>
+								<Label>Validator Description</Label>
 								<IntroText>
 									{validatorDetails?.description?.details}
 								</IntroText>

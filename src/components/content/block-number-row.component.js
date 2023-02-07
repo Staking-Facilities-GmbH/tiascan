@@ -96,16 +96,26 @@ const CTA = styled.div`
 	display: inline-block;
 	background-color: ${({ theme }) => theme.colors.contentBg};
 	border-radius: ${({ theme }) => theme.border.mediumRadius};
-	box-shadow: ${({ theme }) => theme.shadows.boxShadow};
 	padding: 1.1rem 2.7rem 0.7rem;
 	vertical-align: top;
+	transition: 1.5s ease-in-out;
+	border: 0.1rem solid transparent;
+	margin-top: -0.1rem;
+	
+	&::before {
+		display: block;
+		width: 100%;
+		height: 100%;
+		box-shadow: ${({ theme }) => theme.shadows.boxShadow};
+	}
 	
 	figure {
 		display: inline-block;
 	}
 	
 	&:hover {
-		box-shadow: ${({ theme }) => theme.shadows.ctaShadow}
+		box-shadow: ${({ theme }) => theme.shadows.ctaShadow};
+		border-color: ${({ theme }) => theme.colors.ctaColor};
 	}
 `
 

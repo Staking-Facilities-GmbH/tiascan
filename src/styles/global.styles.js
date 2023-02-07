@@ -69,6 +69,9 @@ export const GlobalStyles = createGlobalStyle`
     background-color: ${({ theme }) => theme.colors.contentBg};
     border-radius: ${({ theme }) => theme.border.mediumRadius};
     box-shadow: ${({ theme }) => theme.shadows.boxShadow};
+    backdrop-filter: blur(4rem);
+    position: relative;
+    z-index: 1;
     
     > div {
       max-width: ${({ theme }) => theme.const.contentWidth};
@@ -129,5 +132,10 @@ export const GlobalStyles = createGlobalStyle`
     .rc-pagination-item-active:focus a, .rc-pagination-item-active:hover a {
       color: #ffffff;
     }
+  }
+  
+  hr {
+    border-style: solid;
+    border-width: 0.05rem;
   }
 `

@@ -12,12 +12,14 @@ import BlockNumberRow from '../../components/content/block-number-row.component'
 import ProgressBar from '../../components/content/progress-bar.component'
 import MapChart from "../../components/content/map.component"
 import Pagination from 'rc-pagination'
+import NodeAnimation from "../../components/content/node_animation";
 
 // Hooks
 import { FormProvider, useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { useLocationProperty } from 'wouter/use-location'
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
+
 
 // Styles
 import '../../styles/pagination.css'
@@ -27,7 +29,6 @@ import CelestiaApi from '../../api/celestia-api'
 
 // Conf
 import apiConf from '../../config/api-config.json'
-import {Link} from "wouter";
 
 const NodesPage = ({nodeType}) => {
 	const [searchValue, setSearchValue] = useState(
@@ -115,6 +116,8 @@ const NodesPage = ({nodeType}) => {
 				</Hero>
 			</Section>
 
+			<NodeAnimation />
+
 			<Section className="contentSection">
 				<Container>
 					<FlexContainer bottom="4rem" left="3rem" right="3rem">
@@ -171,16 +174,16 @@ const NodesPage = ({nodeType}) => {
 								</Col>
 
 								<Col>
-									<ColSpan>{Formatters.readableNumber(row.missed_blocks_counter)}</ColSpan>
+									<ColSpan>{Formatters.readableNumber(row.missed_blocks_counter, false)}</ColSpan>
 								</Col>
 
 								<Col>
 									<ColSpan>
 										<ProgressWrapper>
-											<ProgressInner progress={(100-index)}>
-												<span>{(100-index)} %</span>
+											<ProgressInner progress={row.uptime}>
+												<span>{Formatters.readableNumber(row.uptime)} %</span>
 											</ProgressInner>
-											<ProgressBar progress={(100-index)} startColor="#91F5E6" endColor="#610DFC" />
+											<ProgressBar progress={row.uptime} startColor="#91F5E6" endColor="#610DFC" />
 										</ProgressWrapper>
 									</ColSpan>
 								</Col>
@@ -205,10 +208,10 @@ const NodesPage = ({nodeType}) => {
 								<Col>
 									<ColSpan>
 										<ProgressWrapper>
-											<ProgressInner progress={(100-index)}>
-												<span>{(100-index)} %</span>
+											<ProgressInner progress={row.uptime}>
+												<span>{Formatters.readableNumber(row.uptime)} %</span>
 											</ProgressInner>
-											<ProgressBar progress={(100-index)} startColor="#91F5E6" endColor="#610DFC" />
+											<ProgressBar progress={row.uptime} startColor="#91F5E6" endColor="#610DFC" />
 										</ProgressWrapper>
 									</ColSpan>
 								</Col>
@@ -267,6 +270,9 @@ const HeaderBox = styled.div`
 	padding: 0.5rem 2rem;
 	background-color: ${({ theme }) => theme.colors.contentBg};
 	border-radius: ${({ theme }) => theme.border.mediumRadius};
+	backdrop-filter: blur(4rem);
+	position: relative;
+	z-index: 1;
 	
 	figure {
 		display: inline-block;

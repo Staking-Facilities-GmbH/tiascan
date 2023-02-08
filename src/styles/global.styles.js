@@ -51,6 +51,7 @@ export const GlobalStyles = createGlobalStyle`
   #root {
     position: relative;
     min-height: 100vh;
+    overflow: hidden;
 
     @media all and (min-width: ${({ theme }) => theme.breakpoints.sm}) {
       padding-bottom: 10rem;

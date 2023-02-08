@@ -180,14 +180,23 @@ const Section = styled.section`
 `
 
 const NodeHead = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: left;
+	text-align: center;
 	margin: 2rem 0 6.8rem;
+	
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		text-align: left;
+		display: flex;
+		align-items: center;
+		justify-content: left;
+	}
 `
 
 const Identity = styled.div`
-	margin-left: 4.3rem;
+	margin: 2rem 0 0;
+	
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		margin: 0 0 0 4.3rem;	
+	}
 `
 
 const Name = styled.span`
@@ -240,13 +249,18 @@ const Details = styled.div`
 `
 
 const Detail = styled.div`
-	display: flex;
-	margin: 1rem 0;
+	margin: 1.5rem 0;
+	
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		display: flex;
+		margin: 1rem 0;
+	}
 `
 
 const Label = styled.span`
-	display: inline-block;
+	display: block;
 	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		display: inline-block;
 		min-width: 42%;
 	}
 `
@@ -297,6 +311,7 @@ const ProgressInner = styled.div`
 	position: absolute;
 	z-index: 1;
 	width: ${({ progress }) => progress && progress}%;
+	max-width: 100%;
 	height: 100%;
 	text-align: right;
 
@@ -304,6 +319,7 @@ const ProgressInner = styled.div`
 		color: ${({ progress }) => (parseInt(progress) > 30) ? 'white' : 'black'};
 		display: inline-block;
 		min-width: 5rem;
+		max-width: 100%;
 		max-height: 100%;
 		line-height: 2.6rem;
 		overflow: visible;

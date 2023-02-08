@@ -26,6 +26,8 @@ const BlockNumberRow = ({stats}) => {
 						<span>Block Number:</span> {stats?.latest_height}
 					</BlockNumber>
 				</NumBox>
+			</Front>
+			<Back>
 				<CTA title="Reload page data" onClick={reloadPage}>
 					<figure>
 						<Image
@@ -36,9 +38,6 @@ const BlockNumberRow = ({stats}) => {
 						/>
 					</figure>
 				</CTA>
-			</Front>
-			<Back>
-
 				<CTA title="Check out the glossary" onClick={() => { navigate("/glossary") }}>
 					<figure>
 						<Image
@@ -57,8 +56,6 @@ const BlockNumberRow = ({stats}) => {
 export default BlockNumberRow
 
 const FlexBox = styled.div`
-	display: flex;
-	justify-content: space-between;
 	margin-bottom: 4rem;
 `
 
@@ -76,6 +73,14 @@ const NumBox = styled.div`
 	background-color: ${({ theme }) => theme.colors.blocksBg};
 	border-radius: ${({ theme }) => theme.border.mediumRadius};
 	box-shadow: ${({ theme }) => theme.shadows.boxShadow};
+	position: relative;
+	z-index: -1;
+	margin-bottom: 2rem;
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		float: left;
+		margin-bottom: 0;
+	}
 `
 
 const BlockNumber = styled.span`
@@ -117,6 +122,15 @@ const CTA = styled.div`
 		box-shadow: ${({ theme }) => theme.shadows.ctaShadow};
 		border-color: ${({ theme }) => theme.colors.ctaColor};
 	}
+
+	@media all and (max-width: ${({ theme }) => theme.breakpoints.md}) {
+		margin-right: 2rem;
+	}
 `
 
-const Back = styled.div``
+const Back = styled.div`
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		display: flex;
+		justify-content: space-between;
+	}
+`

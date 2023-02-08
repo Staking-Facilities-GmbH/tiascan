@@ -113,6 +113,14 @@ const NodeDetailPage = ({nodeType, identity}) => {
 								<Label>Last PayForBlob</Label>
 								{Formatters.timeSince(nodeDetails.last_pfb_timestamp)}
 							</Detail>
+							<Detail>
+								<Label>Last Sampled Time</Label>
+								{Formatters.timeSince(nodeDetails.das_latest_sampled_timestamp)}
+							</Detail>
+							<Detail>
+								<Label>Last Restart Time</Label>
+								{Formatters.timeSince(nodeDetails.last_restart_time)}
+							</Detail>
 							{(nodeType === 'bridge') &&
 							<Detail>
 								<Label>Total Synced Headers</Label>
@@ -121,12 +129,12 @@ const NodeDetailPage = ({nodeType, identity}) => {
 							}
 							{(nodeType !== 'bridge') &&
 							<Detail>
-								<Label>Total Sympled Headers (DAS)</Label>
+								<Label>Total Sampled Headers (DAS)</Label>
 								{Formatters.readableNumber(nodeDetails.das_total_sampled_headers)}
 							</Detail>
 							}
 							<Detail>
-								<Label>Uptime Score (last {info?.signed_blocks_window} blocks)</Label>
+								<Label>Uptime Score</Label>
 								<ProgressWrapper>
 									<ProgressInner progress={(nodeDetails?.uptime)}>
 										<span>{Formatters.readableNumber(nodeDetails?.uptime)} %</span>
@@ -167,7 +175,14 @@ const Identity = styled.div`
 const Name = styled.span`
 	display: block;
 	font-weight: 300;
-	font-size: 2.4rem;
+	font-size: 1.6rem;
+	word-break: break-word;
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		display: flex;
+		margin: 1rem 0;
+		font-size: 2.4rem;
+	}
 `
 
 const Details = styled.div`
@@ -175,13 +190,18 @@ const Details = styled.div`
 `
 
 const Detail = styled.div`
-	display: flex;
-	margin: 1rem 0;
+	margin: 1.5rem 0;
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		display: flex;
+		margin: 1rem 0;
+	}
 `
 
 const Label = styled.span`
-	display: inline-block;
+	display: block;
 	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		display: inline-block;
 		min-width: 42%;
 	}
 `
@@ -229,6 +249,7 @@ const ProgressInner = styled.div`
 	position: absolute;
 	z-index: 1;
 	width: ${({ progress }) => progress && progress}%;
+	max-width: 100%;
 	height: 100%;
 	text-align: right;
 
@@ -236,6 +257,7 @@ const ProgressInner = styled.div`
 		color: ${({ progress }) => (parseInt(progress) > 30) ? 'white' : 'black'};
 		display: inline-block;
 		min-width: 5rem;
+		max-width: 100%;
 		max-height: 100%;
 		line-height: 2.6rem;
 		overflow: visible;

@@ -96,7 +96,7 @@ export const GlobalStyles = createGlobalStyle`
       width: 100%;
     }
 
-    @media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    @media all and (min-width: ${({ theme }) => theme.breakpoints.lg}) {
       margin-bottom: -10rem !important;
       
       .map {

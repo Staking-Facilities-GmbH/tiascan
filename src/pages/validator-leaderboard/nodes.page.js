@@ -43,7 +43,7 @@ const NodesPage = ({nodeType}) => {
 		title: 'Validator Leaderboard',
 		cols: ['Identity', 'Node Identity', 'Node Uptime'],
 		icon: 'node-icon.svg',
-		rowGrid: 'minmax(8rem, 8rem) minmax(40rem, auto) minmax(17.7rem, 25rem)'
+		rowGrid: 'minmax(8rem, 8rem) minmax(50rem, auto) minmax(17.7rem, 20rem)'
 	}
 
 	switch (nodeType) {
@@ -60,7 +60,7 @@ const NodesPage = ({nodeType}) => {
 			pageConf.searchPlaceholder = 'Search for name or identity...'
 			pageConf.cols = ['Identity', 'Validator Name', 'Missed Blocks', 'Uptime Score']
 			pageConf.icon = 'validator-icon.svg'
-			pageConf.rowGrid = 'minmax(7rem, 10rem) minmax(35rem, auto) minmax(10rem, 15rem) minmax(17.7rem, 25rem)'
+			pageConf.rowGrid = 'minmax(7rem, 10rem) minmax(35rem, auto) minmax(10rem, 15rem) minmax(17.7rem, 20rem)'
 	}
 
 	useEffect( ()=>{
@@ -291,22 +291,26 @@ const Title = styled.h1`
 const Row = styled.div`
 	display: grid;
 	grid-template-columns: ${({pageConf}) => pageConf.rowGrid};
-	border-bottom: ${({ theme }) => theme.section.border};
+	
+	> div {
+		border-bottom: ${({ theme }) => theme.section.border};
+	}
 	
 	&:last-of-type {
-		border-bottom: none;
+		> div {
+			border-bottom: none;
+		}
 	}
 `
 
 const ColHead = styled.div`
 	font-size: 1.8rem;
-	padding: 1.6rem 0.6rem;
+	padding: 1.6rem 0;
 `
 
 const Col = styled.div`
 	position: relative;
 	font-size: 1.8rem;
-	padding: 0 1.6rem;
 `
 
 const ColSpan = styled.span`
@@ -346,6 +350,7 @@ const ProgressInner = styled.div`
 	position: absolute;
 	z-index: 1;
 	width: ${({ progress }) => progress && progress}%;
+	max-width: 100%;
 	height: 100%;
 	text-align: right;
 
@@ -353,6 +358,7 @@ const ProgressInner = styled.div`
 		color: ${({ progress }) => (parseInt(progress) > 30) ? 'white' : 'black'};
 		display: inline-block;
 		min-width: 5rem;
+		max-width: 100%;
 		max-height: 100%;
 		line-height: 2.6rem;
 		overflow: visible;

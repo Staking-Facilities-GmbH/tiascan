@@ -86,7 +86,12 @@ const LinkBox = styled.div`
 	display: inline-block;
 	background-color: ${({ theme }) => theme.colors.contentBg};
 	border-radius: ${({ theme }) => theme.border.mediumRadius};
-	padding: 0.8rem 2.8rem 0.5rem;	
+	padding: 0.8rem 2.8rem 0.5rem;
+	margin-top: 2rem;
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		margin-top: 0;
+	}
 	
 	a {
 		display: inline-block;

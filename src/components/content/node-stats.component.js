@@ -70,10 +70,14 @@ export default NodeStats
 
 
 const NodeStat = styled.div`
-	margin-left: 3rem;
-	padding: 2rem 3rem;
+	padding: 2rem 1rem;
 	background-color: ${({ theme }) => theme.colors.contentBg};
 	border-radius: ${({ theme }) => theme.border.mediumRadius};
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		margin-left: 3rem;
+		padding: 2rem 3rem;
+	}
 `
 
 const Stat = styled.div`

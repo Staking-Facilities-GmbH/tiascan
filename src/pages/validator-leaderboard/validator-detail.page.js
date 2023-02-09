@@ -203,6 +203,7 @@ const Name = styled.span`
 	display: block;
 	font-weight: 300;
 	font-size: 3rem;
+	word-break: break-word;
 `
 
 const Description = styled.div`

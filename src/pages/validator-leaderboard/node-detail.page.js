@@ -117,7 +117,7 @@ const NodeDetailPage = ({nodeType, identity}) => {
 							}
 							<Detail>
 								<Label>Node Start Time</Label>
-								{new Date(nodeDetails.start_time || '').toLocaleString()}
+								{ (new Date().getFullYear() < 2000) ? new Date(nodeDetails.start_time || '').toLocaleString() : 'N/A'}
 							</Detail>
 							<Detail>
 								<Label>PayForBlob Count</Label>

@@ -1,9 +1,10 @@
 const Formatters = {
     timeSince(date) {
-        var seconds = Math.floor((new Date() - new Date(date)) / 1000)
-        var interval = seconds / 31536000
+        const seconds = Math.floor((new Date() - new Date(date)) / 1000)
+        let interval = seconds / 31536000;
 
         if (interval > 1) {
+            if (new Date().getFullYear() - interval < 2000) return 'N/A'
             return Math.floor(interval) + " years ago"
         }
 
@@ -27,13 +28,13 @@ const Formatters = {
             return Math.floor(interval) + " minutes ago"
         }
 
-        return Math.floor(seconds) + " seconds ago"
+        return Math.floor(seconds) + " seconds"
     },
 
     readableNumber(number, rounding = true) {
         if (isNaN(number)) return number
         if (rounding) number = Math.round((number + Number.EPSILON) * 100) / 100
-        return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+        return parseFloat(number).toLocaleString('en-US')
     },
 
     checkHttp(link) {

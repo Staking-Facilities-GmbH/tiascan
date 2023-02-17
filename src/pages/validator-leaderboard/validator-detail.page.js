@@ -97,32 +97,6 @@ const ValidatorDetailPage = ({params}) => {
 
 						<hr />
 
-						<Facts>
-							<Fact>
-								<Number>{validatorDetails?.commission_rate}</Number>
-								<Description>
-									Commission Initial Rate<br />
-									(Comission Rate %)
-								</Description>
-							</Fact>
-							<Fact>
-								<Number>{validatorDetails?.commission_max_rate}</Number>
-								<Description>
-									Commission Initial Rate<br />
-									(Comission Rate %)
-								</Description>
-							</Fact>
-							<Fact>
-								<Number>{validatorDetails?.commission_max_change_rate}</Number>
-								<Description>
-									Commission Initial Rate<br />
-									(Comission Rate %)
-								</Description>
-							</Fact>
-						</Facts>
-
-						<hr />
-
 						<Details>
 							<Detail>
 								<Label>Security Contact</Label>
@@ -132,15 +106,15 @@ const ValidatorDetailPage = ({params}) => {
 								</a>
 							</Detail>
 							<Detail>
+								<Label>Node Identity</Label>
+								{validatorDetails?.node_id}
+							</Detail>
+							<Detail>
 								<Label>Identity</Label>
 								{validatorDetails?.description?.identity}
 							</Detail>
 							<Detail>
-								<Label>Min Self Delegation</Label>
-								{validatorDetails?.min_self_delegation}
-							</Detail>
-							<Detail>
-								<Label>Uptime Score (last {info?.signed_blocks_window} blocks)</Label>
+								<Label>Uptime Score</Label>
 								<ProgressWrapper>
 									<ProgressInner progress={(validatorDetails?.uptime)}>
 										<span>{Formatters.readableNumber(validatorDetails?.uptime)} %</span>
@@ -206,45 +180,6 @@ const Name = styled.span`
 	word-break: break-word;
 `
 
-const Description = styled.div`
-	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
-		text-align: left;
-	}
-`
-
-const Facts = styled.div`
-	margin: 5.8rem 0;
-	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
-		display: flex;
-		justify-content: space-between;
-	}
-`
-
-const Fact = styled.div`
-	text-align: center;
-	
-	:nth-child(1) {
-		span {
-			color:  ${({ theme }) => theme.colors.fact1}
-		}
-	}
-	:nth-child(2) {
-		span {
-			color:  ${({ theme }) => theme.colors.fact2}
-		}
-	}
-	:nth-child(3) {
-		span {
-			color:  ${({ theme }) => theme.colors.fact3}
-		}
-	}
-`
-
-const Number = styled.span`
-	font-size: 6rem;
-	font-weight: 800;
-`
-
 const Details = styled.div`
 	margin: 5.8rem 0;
 `
@@ -276,7 +211,11 @@ const Container = styled.div`
 
 const Content = styled.div`
 	overflow-x: auto;
-	padding: 0 3rem 2rem 5rem;
+	padding: 0 0 2rem;
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		padding: 0 3rem 2rem 5rem;
+	}
 `
 
 const HeaderBox = styled.div`

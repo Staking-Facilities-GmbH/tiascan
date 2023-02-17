@@ -41,6 +41,8 @@ const NodeDetailPage = ({nodeType, identity}) => {
 		case 'light':
 			pageConf.title = 'Light Node Details'
 			break
+		default:
+			pageConf.title = 'Node Details'
 	}
 	
 	// go back to list if no validator ID given
@@ -62,6 +64,7 @@ const NodeDetailPage = ({nodeType, identity}) => {
 			//handle not found - back to list?
 			if (!data.node_id) navigate(`/${nodeType}-nodes`, { replace: true })
 			setNodeDetails(data)
+			console.log(data)
 		})
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
@@ -101,6 +104,18 @@ const NodeDetailPage = ({nodeType, identity}) => {
 								<Label>Head</Label>
 								{Formatters.readableNumber(nodeDetails.head)}
 							</Detail>
+							{(nodeType === 'bridge') &&
+							<Detail>
+								<Label>Total Synced Headers</Label>
+								{Formatters.readableNumber(nodeDetails.total_synced_headers)}
+							</Detail>
+							}
+							{(nodeType !== 'bridge') &&
+							<Detail>
+								<Label>Total Sampled Headers (DAS)</Label>
+								{Formatters.readableNumber(nodeDetails.das_total_sampled_headers)}
+							</Detail>
+							}
 							<Detail>
 								<Label>Node Start Time</Label>
 								{new Date(nodeDetails.start_time || '').toLocaleString()}
@@ -121,18 +136,10 @@ const NodeDetailPage = ({nodeType, identity}) => {
 								<Label>Last Restart Time</Label>
 								{Formatters.timeSince(nodeDetails.last_restart_time)}
 							</Detail>
-							{(nodeType === 'bridge') &&
 							<Detail>
-								<Label>Total Synced Headers</Label>
-								{Formatters.readableNumber(nodeDetails.total_synced_headers)}
+								<Label>Node Uptime</Label>
+								{Formatters.readableNumber(nodeDetails.node_runtime_counter_in_seconds + nodeDetails.last_accumulative_node_runtime_counter_in_seconds) + ' seconds'}
 							</Detail>
-							}
-							{(nodeType !== 'bridge') &&
-							<Detail>
-								<Label>Total Sampled Headers (DAS)</Label>
-								{Formatters.readableNumber(nodeDetails.das_total_sampled_headers)}
-							</Detail>
-							}
 							<Detail>
 								<Label>Uptime Score</Label>
 								<ProgressWrapper>
@@ -213,7 +220,11 @@ const Container = styled.div`
 
 const Content = styled.div`
 	overflow-x: auto;
-	padding: 0 3rem 2rem 5rem;
+	padding: 0 0 2rem;
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		padding: 0 3rem 2rem 5rem;
+	}
 `
 
 const HeaderBox = styled.div`

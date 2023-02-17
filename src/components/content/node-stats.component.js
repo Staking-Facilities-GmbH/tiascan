@@ -90,7 +90,7 @@ const Stat = styled.div`
 `
 
 const TitleLink = styled(Link)`
-	font-size: 2.4rem;
+	font-size: 2rem;
 	line-height: 3.4rem;
 	vertical-align: top;
 	font-weight: 300;
@@ -99,11 +99,19 @@ const TitleLink = styled(Link)`
 	&.active {
 		border-bottom: 0.2rem solid;
 	}
+	
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		font-size: 2.4rem;
+	}
 `
 
 const Count = styled.span`
-	font-size: 2.2rem;
+	font-size: 2rem;
 	font-weight: 300;
 	line-height: 3.4rem;
 	vertical-align: top;
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		font-size: 2.4rem;
+	}
 `

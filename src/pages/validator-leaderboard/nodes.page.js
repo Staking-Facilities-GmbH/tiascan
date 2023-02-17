@@ -253,15 +253,16 @@ const Form = styled.form`
 	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
 		max-width: 50rem;
 		min-width: unset;
-
-		@media all and (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-		}
 	}
 `
 
 const Content = styled.div`
 	overflow-x: auto;
-	padding: 0 3rem 2rem 5rem;
+	padding: 0 0 2rem;
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		padding: 0 3rem 2rem 5rem;
+	}
 `
 
 const HeaderBox = styled.div`

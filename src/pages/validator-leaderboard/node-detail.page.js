@@ -64,7 +64,6 @@ const NodeDetailPage = ({nodeType, identity}) => {
 			//handle not found - back to list?
 			if (!data.node_id) navigate(`/${nodeType}-nodes`, { replace: true })
 			setNodeDetails(data)
-			console.log(data)
 		})
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])

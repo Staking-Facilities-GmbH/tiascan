@@ -1,5 +1,5 @@
 {
-  "API_URL": "https://mojtaba.celestia-devops.dev",
+  "API_URL": "https://leaderboard.celestia.tools",
   "API_PREFIX": "api",
   "API_VERSION": "v1",
   "ITEMS_PER_PAGE": "100"

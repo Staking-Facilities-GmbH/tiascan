@@ -10,13 +10,15 @@ import HamMenuButton from '../ham-menu-button/ham-menu-button.component'
 // Hooks
 import { useBoolean } from 'usehooks-ts'
 import { useLocation } from 'wouter'
+import {useEffect, useState} from "react";
+import CelestiaApi from "../../api/celestia-api";
 
 // Icons
 
 const Header = () => {
 	const location = useLocation()
 	const { value: showMenu, toggle } = useBoolean(false)
-
+	const [info, setInfo] = useState()
 	const navItems = [
 		{
 			name: 'Validators',
@@ -36,13 +38,26 @@ const Header = () => {
 		},
 	]
 
+	useEffect( ()=>{
+		async function triggerFetchInfo() {
+			return await CelestiaApi.fetchInfo()
+		}
+		triggerFetchInfo().then((data) => {
+			setInfo(data)
+		})
+	},[])
+
 	const onNavItemClick = () => {
 		toggle()
 	}
 
 	return (
 		<>
-			<TopBar />
+			<TopBar>
+				<TopBarContent>
+					Network: {info?.network}
+				</TopBarContent>
+			</TopBar>
 			<HeaderContainer>
 				<Link to="/">
 					<LogoFigure>
@@ -212,4 +227,14 @@ const MobileNavLink = styled(Link)`
 const TopBar = styled.div`
 	height: 4.2rem;
 	background-color: ${({ theme }) => theme.footer.backgroundColor};
+	text-align: right;
+`
+
+const TopBarContent = styled.div`
+	color: ${({ theme }) => theme.footer.color};
+	font-size: 1.8rem;
+	line-height: 4.2rem;
+	max-width: ${({ theme }) => theme.const.pageWidth};	
+	margin: 0 auto;
+	padding: 0 2rem;
 `

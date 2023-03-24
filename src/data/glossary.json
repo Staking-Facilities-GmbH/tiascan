@@ -34,8 +34,8 @@
 		"letter": "L",
 		"entries": [
 			{
-				"title": "Last PayForData Message Sent",
-				"content": "PayForData Messages are user-initiated transactions that request data availability from the Celestia App. Last PayForData Message Sent provides indicates when the last such transaction was initiated by the respective node."
+				"title": "Last PayForBlob Message Sent",
+				"content": "PayForBlob Messages are user-initiated transactions that request data availability from the Celestia App. Last PayForBlob Message Sent provides indicates when the last such transaction was initiated by the respective node."
 			},
 			{
 				"title": "Last Sample Requested",
@@ -77,8 +77,8 @@
 				"content": "TIAscan is a block explorer for the Celestia network. By providing real-time information about the Celestia, it empowers any stakeholder to analyze the network."
 			},
 			{
-				"title": "Total PayForData Message Sent",
-				"content": "Users request the Celestia App to make data available by sending PayForData transactions. Every such transaction consists of the identity of the sender, the data to be made available, also referred to as the message, the data size, the namespace ID, and a signature. Every block producer batches multiple PayForData transactions into a block."
+				"title": "Total PayForBlob Message Sent",
+				"content": "Users request the Celestia App to make data available by sending PayForBlob transactions. Every such transaction consists of the identity of the sender, the data to be made available, also referred to as the message, the data size, the namespace ID, and a signature. Every block producer batches multiple PayForBlob transactions into a block."
 			}
 		]
 	},

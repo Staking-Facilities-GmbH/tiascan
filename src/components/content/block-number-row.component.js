@@ -2,6 +2,7 @@
 import styled from 'styled-components'
 import Image from '../image/image.component'
 import { useLocation } from 'wouter'
+import Formatters from '../../formatter/formatters'
 
 const reloadPage = () => {
 	window.location.reload();
@@ -23,7 +24,7 @@ const BlockNumberRow = ({stats}) => {
 						/>
 					</figure>
 					<BlockNumber>
-						<span>Block Number:</span> {stats?.latest_height}
+						<span>Block Number:</span> {Formatters.readableNumber(stats?.latest_height)}
 					</BlockNumber>
 				</NumBox>
 			</Front>
@@ -62,6 +63,15 @@ const FlexBox = styled.div`
 const Front = styled.div`
 	figure {
 		display: inline-block;
+		width: 0;
+		overflow: hidden;
+		margin-left: -1.3rem;
+
+		@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+			width: auto;
+			margin-left: 0;
+			overflow: initial;
+		}
 	}
 `
 
@@ -85,14 +95,18 @@ const NumBox = styled.div`
 
 const BlockNumber = styled.span`
 	display: inline-block;
-	padding-left: 3rem;
-	font-size: 2.4rem;
+	font-size: 2rem;
 	line-height: 3rem;
 	vertical-align: top;
 	font-weight: 300;
 	
 	span {
 		border-bottom: 0.2rem solid;
+	}
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		font-size: 2.4rem;
+		padding-left: 3rem;
 	}
 `
 

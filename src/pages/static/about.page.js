@@ -21,7 +21,10 @@ const AboutPage = () => {
 								Staking Facilities is a Munich-based, Web 3.0 infrastructure, and service provider. They run industry-grade, highly secure physical infrastructure co-located in certified data centers within reach of their company headquarters. Guaranteed uptime, biometric security, and redundant power supply reinforce a continuous and secure operation of their nodes. Through state-of-the-art monitoring, Staking Facilities always knows about the status of their servers and they are alerted immediately if any abnormalities occur. For their customers, they offer non-custodial staking services, personal support, and tools for a variety of thoroughly vetted public Proof-of-Stake blockchains.
 							</Paragraph>
 							<Paragraph>
-								Staking Facilities supported Solana ever since its' inception: they participated in every testnet, as well as TourDeSol and provided liquidity as one of the top market makers on Binance to help bootstrap the ecosystem. Furthermore, they gave birth to Solana Beach and continue to contribute to Solanas' ecosystem development. Wolfgang Albrecht, CEO & Co-Founder of Staking Facilities, is also a board member of the Solana Foundation.
+								Staking Facilities supported Celestia ever since the beginning as participant in the early testnet phases and also the incentivized testnet as validator and bridge node operators.
+							</Paragraph>
+							<Paragraph>
+								Our goal is to not only contribute to our ecosystem as an infrastructure provider but also enrich the space with useful tooling, such as tiascan.com or solanabeach.io. Furthermore our team members serve in verious positions as foundation members, councillors and many more.
 							</Paragraph>
 							<Flex>
 								<Image

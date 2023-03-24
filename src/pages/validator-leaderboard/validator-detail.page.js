@@ -31,13 +31,6 @@ const ValidatorDetailPage = ({params}) => {
 		title: 'Validator Details',
 		icon: 'node-icon.svg'
 	}
-
-	const placeholderData = {
-		commission_max_rate: '5%',
-		commission_rate: '3%',
-		commission_max_change_rate: '0.1%',
-		min_self_delegation: '100 TIA'
-	}
 	
 	// go back to list if no validator ID given
 	if (!nodeId) navigate("/validators", { replace: true })
@@ -57,7 +50,7 @@ const ValidatorDetailPage = ({params}) => {
 		triggerFetchValidatorDetails().then((data) => {
 			//handle not found - back to list?
 			if (!data.node_id) navigate("/validators", { replace: true })
-			setValidatorDetails({...placeholderData, ...data})
+			setValidatorDetails(data)
 		})
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
@@ -69,24 +62,37 @@ const ValidatorDetailPage = ({params}) => {
 			<Section className="contentSection">
 				<Container>
 					<FlexContainer bottom="4rem" left="3rem" right="3rem">
-						<HeaderBox>
-							<figure>
-								<Image
-									src={`/assets/icons/${pageConf.icon}`}
-									alt=""
-									width={34}
-									height={34}
-								/>
-							</figure>
-							<Title>{pageConf.title}</Title>
-						</HeaderBox>
+						<FlexWrap>
+							<CTA title="Go back to the list" onClick={() => { navigate("/validators") }}>
+								<figure>
+									<Image
+										src={`/assets/icons/back-icon.svg`}
+										alt=""
+										width={24}
+										height={24}
+									/>
+								</figure>
+							</CTA>
+							<HeaderBox>
+								<figure>
+									<Image
+										src={`/assets/icons/${pageConf.icon}`}
+										alt=""
+										width={34}
+										height={34}
+									/>
+								</figure>
+								<Title>{pageConf.title}</Title>
+							</HeaderBox>
+						</FlexWrap>
+
 					</FlexContainer>
 
 					<Content>
 						<NodeHead>
 							<Identikon identity={validatorDetails?.node_id} size="100" />
 							<Identity>
-								<Name>{validatorDetails?.moniker}</Name>
+								<Name>{validatorDetails?.moniker || validatorDetails?.node_id}</Name>
 								<a href={Formatters.checkHttp(validatorDetails?.description?.website)}
 								   target="_blank" rel="noreferrer"
 								   title={`${validatorDetails?.moniker} Website`}>
@@ -97,24 +103,69 @@ const ValidatorDetailPage = ({params}) => {
 
 						<hr />
 
+						<Facts>
+							{validatorDetails?.commission?.commission_rates?.rate && (
+							<Fact>
+								<Number>{Formatters.readableNumber(validatorDetails?.commission?.commission_rates?.rate * 100)}%</Number>
+								<Description>
+									Commission Initial Rate<br />
+									(Comission Rate %)
+								</Description>
+							</Fact>
+							)}
+							{validatorDetails?.commission?.commission_rates?.max_rate && (
+							<Fact>
+								<Number>{Formatters.readableNumber(validatorDetails?.commission?.commission_rates?.max_rate * 100)}%</Number>
+								<Description>
+									Commission Max Rate<br />
+									(Comission Rate %)
+								</Description>
+							</Fact>
+							)}
+							{validatorDetails?.commission?.commission_rates?.max_change_rate && (
+							<Fact>
+								<Number>{Formatters.readableNumber(validatorDetails?.commission?.commission_rates?.max_change_rate * 100)}%</Number>
+								<Description>
+									Commission Max Change Rate<br />
+									(Rate per day)
+								</Description>
+							</Fact>
+							)}
+						</Facts>
+
+						<hr />
+
 						<Details>
+							{validatorDetails?.description?.security_contact && (
 							<Detail>
-								<Label>Security Contact</Label>
+								<Label>Security Contact:</Label>
 								<a href={`mailto:${validatorDetails?.description?.security_contact}`}
-									title={`Send email to ${validatorDetails?.moniker}`}>
+								   title={`Send email to ${validatorDetails?.moniker}`}>
 									{validatorDetails?.description?.security_contact}
 								</a>
 							</Detail>
+							)}
+							{validatorDetails?.node_id && (
 							<Detail>
-								<Label>Node Identity</Label>
+								<Label>Node Identity:</Label>
 								{validatorDetails?.node_id}
 							</Detail>
+							)}
+							{validatorDetails?.description?.identity && (
 							<Detail>
-								<Label>Identity</Label>
+								<Label>Identity:</Label>
 								{validatorDetails?.description?.identity}
 							</Detail>
+							)}
+							{validatorDetails?.min_self_delegation && (
 							<Detail>
-								<Label>Uptime Score</Label>
+								<Label>Min Self Delegation:</Label>
+								{validatorDetails?.min_self_delegation} TIA
+							</Detail>
+							)}
+							{validatorDetails?.uptime && (
+							<Detail>
+								<Label>Uptime Score:</Label>
 								<ProgressWrapper>
 									<ProgressInner progress={(validatorDetails?.uptime)}>
 										<span>{Formatters.readableNumber(validatorDetails?.uptime)} %</span>
@@ -122,13 +173,16 @@ const ValidatorDetailPage = ({params}) => {
 									<ProgressBar progress={validatorDetails?.uptime} startColor="#91F5E6" endColor="#610DFC" />
 								</ProgressWrapper>
 							</Detail>
+							)}
 						</Details>
 
 						<hr />
 
+						{validatorDetails?.description?.details && (
+						<>
 						<Details>
 							<Detail>
-								<Label>Validator Description</Label>
+								<Label>Validator Description:</Label>
 								<IntroText>
 									{validatorDetails?.description?.details}
 								</IntroText>
@@ -136,6 +190,9 @@ const ValidatorDetailPage = ({params}) => {
 						</Details>
 
 						<hr />
+						</>
+						)}
+
 
 					</Content>
 				</Container>
@@ -178,6 +235,45 @@ const Name = styled.span`
 	font-weight: 300;
 	font-size: 3rem;
 	word-break: break-word;
+`
+
+const Description = styled.div`
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		text-align: left;
+	}
+`
+
+const Facts = styled.div`
+	margin: 5.8rem 0;
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		display: flex;
+		justify-content: space-between;
+	}
+`
+
+const Fact = styled.div`
+	text-align: center;
+	
+	:nth-child(1) {
+		span {
+			color:  ${({ theme }) => theme.colors.fact1}
+		}
+	}
+	:nth-child(2) {
+		span {
+			color:  ${({ theme }) => theme.colors.fact2}
+		}
+	}
+	:nth-child(3) {
+		span {
+			color:  ${({ theme }) => theme.colors.fact3}
+		}
+	}
+`
+
+const Number = styled.span`
+	font-size: 6rem;
+	font-weight: 800;
 `
 
 const Details = styled.div`
@@ -229,10 +325,15 @@ const HeaderBox = styled.div`
 
 const Title = styled.h1`
 	display: inline;
-	font-size: 2.4rem;
+	font-size: 2rem;
 	line-height: 3rem;
 	border-bottom: 0.2rem solid;
 	vertical-align: top;
+
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		font-size: 2.4rem;
+	}
 `
 
 const ProgressWrapper = styled.div`
@@ -267,5 +368,46 @@ const ProgressInner = styled.div`
 		padding-left: ${({ progress }) => (parseInt(progress) > 30) ? '0' : '115%'};
 		white-space: nowrap;
 		vertical-align: top;
+	}
+`
+
+const FlexWrap = styled.div`
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+	}
+`
+
+const CTA = styled.div`
+	cursor: pointer;
+	display: inline-block;
+	background-color: ${({ theme }) => theme.colors.contentBg};
+	border-radius: ${({ theme }) => theme.border.mediumRadius};
+	padding: 1.1rem 2.7rem 0.7rem;
+	vertical-align: top;
+	transition: 1.5s ease-in-out;
+	border: 0.1rem solid transparent;
+	margin: -0.1rem 2rem 1rem -3.4rem;
+	
+	&::before {
+		display: block;
+		width: 100%;
+		height: 100%;
+		box-shadow: ${({ theme }) => theme.shadows.boxShadow};
+	}
+	
+	figure {
+		display: inline-block;
+	}
+	
+	&:hover {
+		box-shadow: ${({ theme }) => theme.shadows.ctaShadow};
+		border-color: ${({ theme }) => theme.colors.ctaColor};
+	}
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		margin-right: 0;
+		margin-left: 0;
 	}
 `

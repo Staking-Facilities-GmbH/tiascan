@@ -75,17 +75,29 @@ const NodeDetailPage = ({nodeType, identity}) => {
 			<Section className="contentSection">
 				<Container>
 					<FlexContainer bottom="4rem" left="3rem" right="3rem">
-						<HeaderBox>
-							<figure>
-								<Image
-									src={`/assets/icons/${pageConf.icon}`}
-									alt=""
-									width={34}
-									height={34}
-								/>
-							</figure>
-							<Title>{pageConf.title}</Title>
-						</HeaderBox>
+						<FlexWrap>
+							<CTA title="Go back to the list" onClick={() => { navigate(`/${nodeType}-nodes`) }}>
+								<figure>
+									<Image
+										src={`/assets/icons/back-icon.svg`}
+										alt=""
+										width={24}
+										height={24}
+									/>
+								</figure>
+							</CTA>
+							<HeaderBox>
+								<figure>
+									<Image
+										src={`/assets/icons/${pageConf.icon}`}
+										alt=""
+										width={34}
+										height={34}
+									/>
+								</figure>
+								<Title>{pageConf.title}</Title>
+							</HeaderBox>
+						</FlexWrap>
 					</FlexContainer>
 
 					<Content>
@@ -99,48 +111,63 @@ const NodeDetailPage = ({nodeType, identity}) => {
 						<hr />
 
 						<Details>
+							{nodeDetails.head && (
 							<Detail>
-								<Label>Head</Label>
+								<Label>Head:</Label>
 								{Formatters.readableNumber(nodeDetails.head)}
 							</Detail>
-							{(nodeType === 'bridge') &&
+							)}
+							{(nodeType === 'bridge' && nodeDetails.total_synced_headers) && (
 							<Detail>
-								<Label>Total Synced Headers</Label>
+								<Label>Total Synced Headers:</Label>
 								{Formatters.readableNumber(nodeDetails.total_synced_headers)}
 							</Detail>
-							}
-							{(nodeType !== 'bridge') &&
+							)}
+							{(nodeType !== 'bridge' && nodeDetails.das_total_sampled_headers) && (
 							<Detail>
-								<Label>Total Sampled Headers (DAS)</Label>
+								<Label>Total Sampled Headers (DAS):</Label>
 								{Formatters.readableNumber(nodeDetails.das_total_sampled_headers)}
 							</Detail>
-							}
+							)}
+							{nodeDetails.start_time && (
 							<Detail>
-								<Label>Node Start Time</Label>
-								{ (new Date().getFullYear() < 2000) ? new Date(nodeDetails.start_time || '').toLocaleString() : 'N/A'}
+								<Label>Node Start Time:</Label>
+								{ nodeDetails.start_time.charAt(0) === '2' ? new Date(nodeDetails.start_time).toLocaleString() : 'N/A'}
 							</Detail>
+							)}
+							{nodeDetails.pfb_count !== undefined && (
 							<Detail>
-								<Label>PayForBlob Count</Label>
-								{Formatters.readableNumber(nodeDetails.pfb_count)}
+								<Label>PayForBlob Count:</Label>
+								{Formatters.readableNumber(nodeDetails.pfb_count+1)}
 							</Detail>
+							)}
+							{nodeDetails.last_pfb_timestamp && (
 							<Detail>
-								<Label>Last PayForBlob</Label>
+								<Label>Last PayForBlob:</Label>
 								{Formatters.timeSince(nodeDetails.last_pfb_timestamp)}
 							</Detail>
+							)}
+							{nodeDetails.das_latest_sampled_timestamp && (
 							<Detail>
-								<Label>Last Sampled Time</Label>
+								<Label>Last Sampled Time:</Label>
 								{Formatters.timeSince(nodeDetails.das_latest_sampled_timestamp)}
 							</Detail>
+							)}
+							{nodeDetails.last_restart_time && (
 							<Detail>
-								<Label>Last Restart Time</Label>
+								<Label>Last Restart Time:</Label>
 								{Formatters.timeSince(nodeDetails.last_restart_time)}
 							</Detail>
+							)}
+							{(nodeDetails.node_runtime_counter_in_seconds || nodeDetails.last_accumulative_node_runtime_counter_in_seconds) && (
 							<Detail>
-								<Label>Node Uptime</Label>
+								<Label>Node Uptime:</Label>
 								{Formatters.readableNumber(nodeDetails.node_runtime_counter_in_seconds + nodeDetails.last_accumulative_node_runtime_counter_in_seconds) + ' seconds'}
 							</Detail>
+							)}
+							{nodeDetails?.uptime && (
 							<Detail>
-								<Label>Uptime Score</Label>
+								<Label>Uptime Score:</Label>
 								<ProgressWrapper>
 									<ProgressInner progress={(nodeDetails?.uptime)}>
 										<span>{Formatters.readableNumber(nodeDetails?.uptime)} %</span>
@@ -148,6 +175,7 @@ const NodeDetailPage = ({nodeType, identity}) => {
 									<ProgressBar progress={nodeDetails?.uptime} startColor="#91F5E6" endColor="#610DFC" />
 								</ProgressWrapper>
 							</Detail>
+							)}
 						</Details>
 
 						<hr />
@@ -237,10 +265,15 @@ const HeaderBox = styled.div`
 
 const Title = styled.h1`
 	display: inline;
-	font-size: 2.4rem;
+	font-size: 2rem;
 	line-height: 3rem;
 	border-bottom: 0.2rem solid;
 	vertical-align: top;
+
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		font-size: 2.4rem;
+	}
 `
 
 const ProgressWrapper = styled.div`
@@ -275,5 +308,46 @@ const ProgressInner = styled.div`
 		padding-left: ${({ progress }) => (parseInt(progress) > 30) ? '0' : '115%'};
 		white-space: nowrap;
 		vertical-align: top;
+	}
+`
+
+const FlexWrap = styled.div`
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+	}
+`
+
+const CTA = styled.div`
+	cursor: pointer;
+	display: inline-block;
+	background-color: ${({ theme }) => theme.colors.contentBg};
+	border-radius: ${({ theme }) => theme.border.mediumRadius};
+	padding: 1.1rem 2.7rem 0.7rem;
+	vertical-align: top;
+	transition: 1.5s ease-in-out;
+	border: 0.1rem solid transparent;
+	margin: -0.1rem 2rem 1rem -3.4rem;
+	
+	&::before {
+		display: block;
+		width: 100%;
+		height: 100%;
+		box-shadow: ${({ theme }) => theme.shadows.boxShadow};
+	}
+	
+	figure {
+		display: inline-block;
+	}
+	
+	&:hover {
+		box-shadow: ${({ theme }) => theme.shadows.ctaShadow};
+		border-color: ${({ theme }) => theme.colors.ctaColor};
+	}
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		margin-right: 0;
+		margin-left: 0;
 	}
 `

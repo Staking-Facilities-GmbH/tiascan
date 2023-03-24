@@ -161,14 +161,19 @@ const NodesPage = ({nodeType}) => {
 							{(nodeType === 'validator') &&
 							<>
 								<Col>
-									<Identikon identity={row.opr_addr} />
+									<>
+										<RowNumber>
+											{page * apiConf.ITEMS_PER_PAGE - apiConf.ITEMS_PER_PAGE + index + 1}
+										</RowNumber>
+										<Identikon identity={row.opr_addr} />
+									</>
 								</Col>
 
 								<Col>
 									<ColSpan>
 										<Link to={`/validator/${row.opr_addr}`}
 											title={`Check details of ${row.moniker}`}>
-											{row.moniker}
+											{row.moniker || row.opr_addr}
 										</Link>
 									</ColSpan>
 								</Col>
@@ -193,7 +198,12 @@ const NodesPage = ({nodeType}) => {
 							{(nodeType !== 'validator') &&
 							<>
 								<Col>
-									<Identikon identity={row.node_id} />
+									<>
+										<RowNumber>
+											{page * apiConf.ITEMS_PER_PAGE - apiConf.ITEMS_PER_PAGE + index + 1}
+										</RowNumber>
+										<Identikon identity={row.node_id} />
+									</>
 								</Col>
 
 								<Col>
@@ -283,10 +293,15 @@ const HeaderBox = styled.div`
 
 const Title = styled.h1`
 	display: inline;
-	font-size: 2.4rem;
+	font-size: 2rem;
 	line-height: 3rem;
 	border-bottom: 0.2rem solid;
 	vertical-align: top;
+
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		font-size: 2.4rem;
+	}
 `
 
 const Row = styled.div`
@@ -367,5 +382,18 @@ const ProgressInner = styled.div`
 		padding-left: ${({ progress }) => (parseInt(progress) > 30) ? '0' : '115%'};
 		white-space: nowrap;
 		vertical-align: top;
+	}
+`
+
+const RowNumber = styled.span`
+	position: relative;
+	padding-right: 3.5rem;
+	width: 0;
+	overflow: visible;
+	top: -0.8rem;
+	
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+		left: -3.5rem;
+		padding-right: 0;
 	}
 `

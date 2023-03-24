@@ -33,8 +33,8 @@ const Formatters = {
 
     readableNumber(number, rounding = true) {
         if (isNaN(number)) return number
-        if (rounding) number = Math.round((number + Number.EPSILON) * 100) / 100
-        return parseFloat(number).toLocaleString('en-US')
+        if (rounding) number = Math.round((parseFloat(number) + Number.EPSILON) * 100) / 100
+        return number.toLocaleString('en-US')
     },
 
     checkHttp(link) {

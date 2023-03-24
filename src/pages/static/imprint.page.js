@@ -19,18 +19,18 @@ const ImprintPage = () => {
 								Responsible in accordance with section 51 TMG
 							</ParagraphTitle>
 							<ParagraphTitle>
-								Staking Facilities GmbH
+								Staking Facilities Services GmbH & Co. KG
 							</ParagraphTitle>
 							<Paragraph>
-								Claudius-Keller-Straße 3b<br />
-								81669 Munich<br />
+								Rosenheimer Str. 18<br />
+								85653 Aying<br />
 								Germany
 							</Paragraph>
 							<ParagraphTitle>
 								Represented by Managing Directors
 							</ParagraphTitle>
 							<Paragraph>
-								Wolfgang Albrecht, Julius Schmidt
+								Wolfgang Albrecht
 							</Paragraph>
 							<ParagraphTitle>
 								Contact
@@ -44,9 +44,10 @@ const ImprintPage = () => {
 							<Paragraph>
 								Entry in the commercial register<br />
 								Register court: Amtsgericht Munich<br />
-								Register number: HRB 232811<br />
-								VAT identification number in accordance with section 27a of the German VAT act: DE 313007966<br /><br />
-								© 2021 All rights reserved. Reprint by permission only. All information is subject to change.
+								Register number: HRB 116001<br />
+							</Paragraph>
+							<Paragraph>
+								© 2023 All rights reserved. Reprint by permission only. All information is subject to change.
 							</Paragraph>
 						</Content>
 					</Container>

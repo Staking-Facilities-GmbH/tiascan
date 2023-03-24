@@ -165,7 +165,7 @@ const NodeDetailPage = ({nodeType, identity}) => {
 								{Formatters.readableNumber(nodeDetails.node_runtime_counter_in_seconds + nodeDetails.last_accumulative_node_runtime_counter_in_seconds) + ' seconds'}
 							</Detail>
 							)}
-							{nodeDetails?.uptime && (
+							{!nodeDetails?.jailed && nodeDetails?.uptime && (
 							<Detail>
 								<Label>Uptime Score:</Label>
 								<ProgressWrapper>
@@ -175,6 +175,12 @@ const NodeDetailPage = ({nodeType, identity}) => {
 									<ProgressBar progress={nodeDetails?.uptime} startColor="#91F5E6" endColor="#610DFC" />
 								</ProgressWrapper>
 							</Detail>
+							)}
+							{nodeDetails?.jailed && (
+								<Detail>
+									<Label><strong>Jailed:</strong></Label>
+									{nodeDetails?.jailed ? '<strong>Yes</strong>' : 'No'}
+								</Detail>
 							)}
 						</Details>
 

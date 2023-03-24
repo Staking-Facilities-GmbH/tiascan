@@ -2,6 +2,7 @@
 import styled from 'styled-components'
 import Image from '../image/image.component'
 import {Link} from "wouter";
+import Formatters from "../../formatter/formatters";
 
 const NodeStats = ({stats, active}) => {
 	return (
@@ -18,7 +19,7 @@ const NodeStats = ({stats, active}) => {
 				<TitleLink to="/validators" className={active === 'validator' ? 'active' : ''}>
 					Validators:
 				</TitleLink>
-				<Count> {stats?.counts?.validators_nodes}</Count>
+				<Count> {Formatters.readableNumber(stats?.counts?.validators_nodes)}</Count>
 			</Stat>
 			<Stat>
 				<figure>
@@ -32,7 +33,7 @@ const NodeStats = ({stats, active}) => {
 				<TitleLink to="/bridge-nodes" className={active === 'bridge' ? 'active' : ''}>
 					Bridge Nodes:
 				</TitleLink>
-				<Count> {stats?.counts?.bridge_nodes}</Count>
+				<Count> {Formatters.readableNumber(stats?.counts?.bridge_nodes)}</Count>
 			</Stat>
 			<Stat>
 				<figure>
@@ -46,7 +47,7 @@ const NodeStats = ({stats, active}) => {
 				<TitleLink to="/full-storage" className={active === 'full' ? 'active' : ''}>
 					Full Storage Nodes:
 				</TitleLink>
-				<Count> {stats?.counts?.full_nodes}</Count>
+				<Count> {Formatters.readableNumber(stats?.counts?.full_nodes)}</Count>
 			</Stat>
 			<Stat>
 				<figure>
@@ -60,7 +61,7 @@ const NodeStats = ({stats, active}) => {
 				<TitleLink to="/light-nodes" className={active === 'light' ? 'active' : ''}>
 					Light Nodes:
 				</TitleLink>
-				<Count> {stats?.counts?.light_nodes}</Count>
+				<Count> {Formatters.readableNumber(stats?.counts?.light_nodes)}</Count>
 			</Stat>
 		</NodeStat>
 	)

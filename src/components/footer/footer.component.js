@@ -46,6 +46,7 @@ const Footer = () => {
 					))}
 				</NavList>
 			</Nav>
+			<Copy>Made with ❤ by Staking Facilities</Copy>
 		</FooterContent>
 	</FooterContainer>
 }
@@ -66,21 +67,30 @@ const FooterContainer = styled.footer`
 const FooterContent = styled.div`
 	max-width: ${({ theme }) => theme.const.pageWidth};	
 	margin: 0 auto;
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+		display: flex;
+		justify-content: space-between;
+	}
 `
 
 const Nav = styled.nav``
 
 const NavList = styled.ul`
-	width: 100%;
-	padding: 0.75rem;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: center;
-	gap: 1rem 4rem;
+	padding: 0;
+	margin: 0;	
+	display: block;
+	overflow: hidden;
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+		width: auto;
+	}
 `
 
 const NavItem = styled.li`
+	margin: 1rem 1.7rem;
+	float: left;
+	
 	a {
 		cursor: pointer;
 		color: ${({ theme }) => theme.footer.color};
@@ -98,4 +108,16 @@ const NavItem = styled.li`
 `
 
 const NavLink = styled(Link)`
+`
+
+const Copy = styled.span`
+	color: ${({ theme }) => theme.footer.color};
+	font-size: 1.8rem;
+	text-align: left;
+	display: inline-block;
+	margin: 1rem 1.7rem;
+
+	@media all and (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+		text-align: right;
+	}
 `

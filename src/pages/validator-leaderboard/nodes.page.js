@@ -386,6 +386,7 @@ const ProgressInner = styled.div`
 `
 
 const RowNumber = styled.span`
+	display: inline-block;
 	position: relative;
 	padding-right: 3.5rem;
 	width: 0;
